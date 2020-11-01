@@ -17,7 +17,7 @@ Pääkäyttäjä voi valita jonkun tietyn asiakkaan tiedot nähtäväksi / muute
 Järjestelmässä olevat taulut:
 
 - Asiakastiedot (asiakkaan perustiedot: nimi, osoite, puhelinnumero, kieli, sähköpostiosoite)
-onko kortilla varoituksia
+
 - Tilitiedot (asiakkaan käytössä olevat tilit)
 
 - Tilitapahtumat (tietyn tilin tapahtumat) En tiedä vielä miten tilitapahtumia luodaan, ehkä vain tylsästi lisätään tapahtuman nimi ja rahasumma
