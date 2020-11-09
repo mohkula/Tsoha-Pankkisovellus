@@ -1,0 +1,17 @@
+<form action="/newUser" method="POST">
+
+<p>Luo Käyttäjä<br>
+<p>Tunnus:<br>
+<input type="text" name="newUsername"></p>
+<p>Sähköpostiosoite:
+<input type="Text" name="emailAddress"></p>
+<p>Puhelinnumero:
+<input type="Text" name="phoneNumber"></p>
+
+<p>Osoite:
+<input type="Text" name="address"></p>
+
+<p>Salasana:<br>
+<input type="password" name="newPassword"></p>
+<input type="submit" value="Luo käyttäjä">
+</form>
