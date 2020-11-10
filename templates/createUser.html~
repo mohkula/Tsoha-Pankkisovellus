@@ -3,12 +3,12 @@
 <p>Luo Käyttäjä<br>
 <p>Tunnus:<br>
 <input type="text" name="newUsername"></p>
-<p>Sähköpostiosoite:
+<p>Sähköpostiosoite:<br>
 <input type="Text" name="emailAddress"></p>
-<p>Puhelinnumero:
+<p>Puhelinnumero:<br>
 <input type="Text" name="phoneNumber"></p>
 
-<p>Osoite:
+<p>Osoite:<br>
 <input type="Text" name="address"></p>
 
 <p>Salasana:<br>
