@@ -1,0 +1,18 @@
+
+<form action="/userPage" method="POST">
+<p>Olet kirjautunut nimellä {{ session.username }}</p>
+
+Tiedot:
+
+<ul>
+{% for i in info %}
+<li> {{ i }}
+{% endfor %}
+</ul>
+
+
+
+<input type="submit" value="Näytä tiedot">
+<a href="/logout">Kirjaudu ulos</a>
+
+</form>

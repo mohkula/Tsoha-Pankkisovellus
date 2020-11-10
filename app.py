@@ -11,21 +11,11 @@ import re
 app = Flask(__name__)
 app.secret_key = getenv("SECRET_KEY")
 
-
+                                                                    
 from newUser import newUser
 import routes
 from login import login
 
-
-    
-    
-
-   
-
-	
-
-	
-    
 
     
 @app.route("/createNewUser", methods =["POST"])

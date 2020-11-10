@@ -1,10 +1,12 @@
 from db import db
 from app import app
 from werkzeug.security import check_password_hash, generate_password_hash
-from flask import request, render_template, session, redirect
+from flask import render_template, session, redirect
+
 
 @app.route("/login", methods =["POST"])
 def login():
+    print(3)
     username = request.form["username"]
     password = request.form["password"]
     
@@ -12,8 +14,8 @@ def login():
     result = db.session.execute(sql, {"username":username})
     user = result.fetchone()    
     if user == None:
-        # TODO: invalid username
-        print("kayttajaa ei loydy")
+        print(2)
+        return redirect("/")
     	
     else:
         hash_value = user[0]
@@ -21,18 +23,12 @@ def login():
         session["username"] = username
     else:
         print("vaara salasana")
+        return redirect("/")
   
     
-    
-    # TODO: check username and password
-    return redirect("/")
+    print(1)
+    return render_template("userPage.html")
     
    
-def emailMatch(email):
-    pattern = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
-    if(re.search(pattern,email)):  
-        return True
-          
-    else:  
-        return False  
+ 
 	
