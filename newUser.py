@@ -8,7 +8,7 @@ import re
 from userPage import userPage
     
 def emailMatch(email):
-    pattern = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
+    pattern = '^[a-zA-Z0-9]+[\._]?[a-zA-Z0-9]+[@]\w+[.]\w{2,3}$'
     if(re.search(pattern,email)):  
         return True
           
@@ -24,10 +24,11 @@ def newUser():
     address = request.form["address"]
     
     if len(username) == 0:
-    	print("Username cant be empty")
-    	return render_template("createUser.html")
+        print("Username can't be empty")
+        return render_template("createUser.html")
     	
     if not emailMatch(email):
+    	print("Email not correct")
     	return render_template("createUser.html")
    
     if len(phoneNumber) != 10 or not phoneNumber.isdigit():
@@ -52,10 +53,14 @@ def newUser():
         
             session["username"] = username
         else:
-        	print("password too short")
+            print("password too short")
+            return render_template("createUser.html")
+
   
     else:
-    	print("user already exists")
+        print("user already exists")
+        return render_template("createUser.html")
+
     
   
     

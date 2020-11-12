@@ -1,8 +1,8 @@
-<form action="/newUser" method="POST">
+<form action="/newUser" method="POST" onsubmit="return check(this)">
 
 <p>Luo Käyttäjä<br>
 <p>Tunnus:<br>
-<input type="text" name="newUsername"></p>
+<input type="Text" name="newUsername"></p>
 <p>Sähköpostiosoite:<br>
 <input type="Text" name="emailAddress"></p>
 <p>Puhelinnumero:<br>
@@ -15,3 +15,35 @@
 <input type="password" name="newPassword"></p>
 <input type="submit" value="Luo käyttäjä">
 </form>
+
+
+
+<script>
+function check(form) {
+    if (form.newUsername.value.length == 0) {
+        alert("Tunnus ei saa olla tyhjä!");
+        return false;
+    }
+   
+    
+   if(!validateEmail(form.emailAddress){
+   	    alert("Sähköposti on väärässä muodossa");
+        return false;
+   		 
+   }
+    
+     if (form.newPassword.value.length < 8) {
+        alert("Salasana liian lyhyt");
+        return false;
+    }
+    
+    return true;
+}
+
+
+
+function validateEmail(email) {
+    const re = /^([0-9a-zA-Z]([-\.\+\_\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$/;
+    return re.test(String(email).toLowerCase());
+}
+</script>
