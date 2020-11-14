@@ -10,4 +10,4 @@ Kun käyttäjä on luotu, pääsee käyttäjäsivulle, josta voi nähdä omat ti
 ja salasanalla.
   
 Ohjelmaa pääsee kokeilemaan tästä linkistä:
-(https://tsoha-bank.herokuapp.com/)
+https://tsoha-bank.herokuapp.com/
