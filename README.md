@@ -9,3 +9,5 @@ muodossa oleva sähköposti (jotain.jotain@jotain.jotain) ja puhelinnumero (pelk
 Kun käyttäjä on luotu, pääsee käyttäjäsivulle, josta voi nähdä omat tietonsa. Käyttäjäsivulle pääsee myös kirjautumalla käyttäjänimellä
 ja salasanalla.
   
+Ohjelmaa pääsee kokeilemaan tästä linkistä:
+(https://tsoha-bank.herokuapp.com/)
