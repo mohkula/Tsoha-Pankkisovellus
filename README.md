@@ -8,6 +8,8 @@ Vääränlaisen sähköpostin tai puhelinnumeron tapauksessa ei tule valitusta, 
 muodossa oleva sähköposti (jotain.jotain@jotain.jotain) ja puhelinnumero (pelkkiä numeroita 10 kpl).
 Kun käyttäjä on luotu, pääsee käyttäjäsivulle, josta voi nähdä omat tietonsa. Käyttäjäsivulle pääsee myös kirjautumalla käyttäjänimellä
 ja salasanalla.
+
+Sovellukseen voi kirjautua pääkäyttäjänä käyttämällä tunnusta Mainuser ja salasanaa MainuserPassword
   
 Ohjelmaa pääsee kokeilemaan tästä linkistä:
 https://tsoha-bank.herokuapp.com/
