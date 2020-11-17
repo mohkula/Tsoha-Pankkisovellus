@@ -5,15 +5,13 @@ from flask import render_template, session, redirect, request
 
 
 
-def isMainuser(username):
+def isMainuser(username, password):
     sql = "SELECT mainUser FROM users WHERE username=:username"
     result = db.session.execute(sql, {"username":username})
-    status = str(result.fetchall())
+    status = result.fetchone()
     print(status)
-    
-    if "False" in status:
-    	return False;
-    return True
+    print("ismainuser")
+    return status
     	
 	
 
@@ -40,7 +38,7 @@ def login():
         	
         	
         session["username"] = username
-        if(isMainuser(username)):
+        if(isMainuser):
         	print("on main user")
         	return render_template("mainuserPage.html")
         	
