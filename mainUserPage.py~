@@ -6,11 +6,11 @@ from db import db
 def mainUserPage():
 	
 
-    sql = "SELECT email, phone, address FROM users WHERE username <> 'Mainuser'"
+    sql = "SELECT * FROM users"
     result = db.session.execute(sql)
-    userInfo = result.fetchall()    
+    user = result.fetchall()    
 	
     
 	
 	
-    return render_template("mainuserPage.html", info = userInfo)
+    return render_template("userInfo.html", info = user)

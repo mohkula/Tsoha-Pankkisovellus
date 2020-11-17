@@ -1,3 +1,19 @@
+
+
+
+{%if info %}
+Tiedot:
+
+<ul>
+{% for i in info %}
+<li> {{ i }}
+{% endfor %}
+</ul>
+{% endif %}
+
+
+
+
 <form action="/userPage" method="POST">
 
 <p>Olet kirjautunut nimellä {{ session.username }}</p>

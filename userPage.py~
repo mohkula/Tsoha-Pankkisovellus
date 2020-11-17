@@ -12,6 +12,7 @@ def userPage():
     result = db.session.execute(sql, {"username":username})
     user = result.fetchone()    
 	
+    print(user)
 	
 	
     return render_template("userInfo.html", info = user)

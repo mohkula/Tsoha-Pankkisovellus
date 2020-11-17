@@ -10,7 +10,7 @@
 
 
 
-<form action="/userPage" method="POST">
+<form action="/mainUserPage" method="POST">
 
 <input type="submit" value="Näytä asiakkaat">                   
 <a href="/logout">Kirjaudu ulos</a>
