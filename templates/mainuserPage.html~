@@ -1,0 +1,18 @@
+<form action="/userPage" method="POST">
+
+<p>Olet kirjautunut pääkäyttäjänä nimellä {{ session.username }}</p>
+
+<input type="submit" value="Näytä tiedot">
+                  
+
+
+</form>
+
+
+
+<form action="/userPage" method="POST">
+
+<input type="submit" value="Näytä asiakkaat">                   
+<a href="/logout">Kirjaudu ulos</a>
+
+</form>

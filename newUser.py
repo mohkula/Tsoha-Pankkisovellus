@@ -15,6 +15,10 @@ def emailMatch(email):
     else:  
         return False  
         
+        
+
+	
+        
 @app.route("/newUser", methods =["POST"])
 def newUser():
     username = request.form["newUsername"]
@@ -24,17 +28,18 @@ def newUser():
     address = request.form["address"]
     
     if len(username) == 0:
-        print("Username can't be empty")
-        return render_template("createUser.html")
+        
+        return render_template("createUser.html", error = "Käyttäjänimi ei saa olla tyhjä")
     	
     if not emailMatch(email):
-    	print("Email not correct")
-    	return render_template("createUser.html")
+    	return render_template("createUser.html", error = "Sähköposti ei kelpaa")
    
     if len(phoneNumber) != 10 or not phoneNumber.isdigit():
-    	print("phone number must be 10 digits")
-    	return render_template("createUser.html")
     	
+    	return render_template("createUser.html", error = "Puhelinnumero ei kelpaa, täytyy olla 10 numeroa")
+    	
+    if len(address) == 0:
+        return render_template("createUser.html", error = "Osoite ei saa olla tyhjä")
 
     
     sql = "SELECT username FROM users WHERE username=:username"

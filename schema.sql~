@@ -1,0 +1,5 @@
+CREATE TABLE users (id SERIAL PRIMARY KEY, username TEXT, password TEXT,
+ email TEXT, phone INTEGER, address TEXT, mainUser BOOLEAN NOT NULL DEFAULT FALSE);
+
+INSERT INTO users (username,password, email, phone,address)
+            VALUES ("Mainuser","d",Main.main@main.com, 1756475849,"Mainland", TRUE);

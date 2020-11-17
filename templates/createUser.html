@@ -1,3 +1,10 @@
+{% if error %}
+<div id="error" style="color:red">
+    <p><em>{{error}}</em></p>
+</div>
+{% endif %}
+
+
 <form action="/newUser" method="POST" onsubmit="return check(this)">
 <p>Luo Käyttäjä<br>
 <p>Tunnus:<br>

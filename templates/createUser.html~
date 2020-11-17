@@ -25,11 +25,6 @@ function check(form) {
         return false;
     }
     
-    if(!validateEmail(form.emailAddress){
-   	    alert("Sähköposti on väärässä muodossa");
-        return false;
-   		 
-    }
     
     if (form.newPassword.value.length < 8) {
         alert("Salasana liian lyhyt");
@@ -37,12 +32,5 @@ function check(form) {
     }
     
     return true;
-}
-</script>
-
-</script>
-function validateEmail(email) {
-    const re = /^([0-9a-zA-Z]([-\.\+\_\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$/;
-    return re.test(String(email).toLowerCase());
 }
 </script>
