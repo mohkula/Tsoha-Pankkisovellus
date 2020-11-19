@@ -15,15 +15,13 @@ app.secret_key = getenv("SECRET_KEY")
 from newUser import newUser
 import routes
 from login import login
+from mainUserPage import mainUserPage
 
 
 
 
     
-@app.route("/createNewUser", methods =["POST"])
-def createNewUser():
-	
-	return render_template("createUser.html")
+
 
 @app.route("/logout")
 def logout():

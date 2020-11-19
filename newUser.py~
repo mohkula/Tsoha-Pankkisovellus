@@ -63,7 +63,8 @@ def newUser():
 
   
     else:
-        return render_template("createUser.html", error = "Käyttäjänimi on jo olemassa")
+        print("user already exists")
+        return render_template("createUser.html")
 
     
   

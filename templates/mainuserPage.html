@@ -1,3 +1,8 @@
+{% if session.username %}
+
+
+
+
 {%if info %}
 Asiakkaiden tiedot:
 
@@ -20,3 +25,4 @@ Asiakkaiden tiedot:
 <a href="/logout">Kirjaudu ulos</a>
 
 </form>
+{% endif %}

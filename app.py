@@ -16,15 +16,12 @@ from newUser import newUser
 import routes
 from login import login
 from mainUserPage import mainUserPage
-
+from createNewUser import createNewUser		
 
 
 
     
-@app.route("/createNewUser", methods =["POST"])
-def createNewUser():
-	
-	return render_template("createUser.html")
+
 
 @app.route("/logout")
 def logout():

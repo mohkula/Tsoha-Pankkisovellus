@@ -1,18 +1,22 @@
-<form action="/userPage" method="POST">
+{%if info %}
+Asiakkaiden tiedot:
 
-<p>Olet kirjautunut pääkäyttäjänä nimellä {{ session.username }}</p>
+<ul>
+{% for i in info %}
+<li> {{ i }}
+{% endfor %}
+</ul>
+{% endif %}
 
-<input type="submit" value="Näytä tiedot">
-                  
 
 
-</form>
+
 
 
 
 <form action="/mainUserPage" method="POST">
 
-<input type="submit" value="Näytä asiakkaat">                   
+<input type="submit" value="Näytä asiakkaiden tietot">                   
 <a href="/logout">Kirjaudu ulos</a>
 
 </form>

@@ -1,3 +1,10 @@
+{% if error %}
+<div id="error" style="color:red">
+    <p><em>{{error}}</em></p>
+</div>
+{% endif %}
+
+
 <form action="/newUser" method="POST" onsubmit="return check(this)">
 <p>Luo Käyttäjä<br>
 <p>Tunnus:<br>
@@ -14,6 +21,15 @@
 <input type="password" name="newPassword"></p>
 <input type="submit" value="Luo käyttäjä">
 </form>
+
+<form action="/" method="POST">
+
+<input type="submit" value="Takaisin">
+</form>
+
+
+
+
 
 <script>
 function check(form) {

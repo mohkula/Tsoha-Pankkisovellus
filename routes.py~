@@ -5,7 +5,6 @@ from db import db
 
 @app.route("/")
 def index():
-    addMainUser()
     return render_template("index.html")
     
     

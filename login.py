@@ -9,7 +9,6 @@ def isMainuser(username):
     sql = "SELECT mainUser FROM users WHERE username=:username"
     result = db.session.execute(sql, {"username":username})
     status = str(result.fetchall())
-    print(status)
     
     if "False" in status:
     	return False;
@@ -31,7 +30,8 @@ def login():
     user = result.fetchone()    
     if user == None:
         
-        return redirect("/")
+        return render_template("index.html", error = "Väärä käyttäjänimi tai salasana")
+
     	
     else:
         hash_value = user[0]
@@ -46,8 +46,7 @@ def login():
         	
         	
     else:
-        print("vaara salasana")
-        return redirect("/")
+        return render_template("index.html", error = "Väärä käyttäjänimi tai salasana")
   
     
     
