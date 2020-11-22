@@ -17,7 +17,12 @@ def emailMatch(email):
         
         
 
-	
+def isTooLong(info,max_length):	
+    
+    if len(info) > max_length:
+        return True        
+    
+    return False
         
 @app.route("/newUser", methods =["POST"])
 def newUser():
@@ -30,6 +35,20 @@ def newUser():
     if len(username) == 0:
         
         return render_template("createUser.html", error = "Käyttäjänimi ei saa olla tyhjä")
+        
+    if isTooLong(username, 10):
+        return render_template("createUser.html", error = "Käyttäjänimi saa olla enintään 10 merkkiä")
+        
+    if isTooLong(email, 30):
+        return render_template("createUser.html", error = "Sähköposti saa olla enintään 30 merkkiä")
+        
+    if isTooLong(address, 30):
+        return render_template("createUser.html", error = "Osoite saa olla enintään 30 merkkiä")
+        
+    if isTooLong(password, 30):
+        return render_template("createUser.html", error = "Salasana saa olla enintään 30 merkkiä")
+    
+
     	
     if not emailMatch(email):
     	return render_template("createUser.html", error = "Sähköposti ei kelpaa")
@@ -40,6 +59,7 @@ def newUser():
     	
     if len(address) == 0:
         return render_template("createUser.html", error = "Osoite ei saa olla tyhjä")
+        
 
     
     sql = "SELECT username FROM users WHERE username=:username"
