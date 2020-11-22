@@ -4,6 +4,10 @@
 </div>
 {% endif %}
 
+{% extends "layout.html" %}
+
+
+{% block body %}
 <form action="/login" method="POST" onsubmit="return check(this)">
 <p>Kirjaudu sisään<br>
 <p>Tunnus:<br>
@@ -17,6 +21,7 @@
 <input type="submit" value="Luo käyttäjä">
 </form>
 
+{% endblock %}
 
 
 <script>

@@ -1,6 +1,7 @@
-
+{% extends "layout.html" %}
 {% if session.username %}
 
+{% block body %}
 {%if info %}
 Tiedot:
 
@@ -22,4 +23,7 @@ Tiedot:
 <a href="/logout">Kirjaudu ulos</a>
 
 </form>
+
+{% endblock %}
+
 {% endif %}

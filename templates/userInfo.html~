@@ -1,9 +1,25 @@
+{% extends "layout.html" %}
+
+
+
+{% if session.username %}
 
 <form action="/userPage" method="POST">
 <p>Olet kirjautunut nimellä {{ session.username }}</p>
 
-Täällä on tietosi
+Tiedot:
+
+<ul>
+{% for i in info %}
+<li> {{ i }}
+{% endfor %}
+</ul>
+
+
+
 <input type="submit" value="Näytä tiedot">
 <a href="/logout">Kirjaudu ulos</a>
 
 </form>
+
+{% endif %}

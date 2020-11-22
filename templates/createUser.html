@@ -5,6 +5,10 @@
 {% endif %}
 
 
+{% extends "layout.html" %}
+
+{% block body %}
+
 <form action="/newUser" method="POST" onsubmit="return check(this)">
 <p>Luo Käyttäjä<br>
 <p>Tunnus:<br>
@@ -23,6 +27,7 @@
 <a href="/">Takaisin</a>
 </form>
 
+{% endblock %}
 
 
 

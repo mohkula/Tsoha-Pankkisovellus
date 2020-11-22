@@ -4,6 +4,8 @@
 </div>
 {% endif %}
 
+{% extends "layout.html" %}
+
 <form action="/login" method="POST" onsubmit="return check(this)">
 <p>Kirjaudu sisään<br>
 <p>Tunnus:<br>
@@ -30,7 +32,7 @@ function check(form) {
     }
     
     
-    if (form.newPassword.value.length == 0) {
+    if (form.password.value.length == 0) {
         alert("Salasana ei saa olla tyhjä");
         return false;
     }

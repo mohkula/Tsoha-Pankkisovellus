@@ -1,3 +1,10 @@
+{% extends "layout.html" %}
+
+
+
+{% if session.username %}
+
+{% block body %}
 
 <form action="/userPage" method="POST">
 <p>Olet kirjautunut nimellä {{ session.username }}</p>
@@ -16,3 +23,8 @@ Tiedot:
 <a href="/logout">Kirjaudu ulos</a>
 
 </form>
+
+{% endblock %}
+
+
+{% endif %}

@@ -5,6 +5,8 @@
 {% endif %}
 
 
+{% extends "layout.html" %}
+
 <form action="/newUser" method="POST" onsubmit="return check(this)">
 <p>Luo Käyttäjä<br>
 <p>Tunnus:<br>
@@ -20,12 +22,10 @@
 <p>Salasana:<br>
 <input type="password" name="newPassword"></p>
 <input type="submit" value="Luo käyttäjä">
+<a href="/">Takaisin</a>
 </form>
 
-<form action="/" method="POST">
 
-<input type="submit" value="Takaisin">
-</form>
 
 
 
