@@ -4,10 +4,11 @@
 
 Sovelluksessa voi luoda uuden käyttäjän antamalla käyttäjänimen, sähköpostiosoitteen, puhelinnumeron, osoitteen ja salasanan.
 käyttäjää luodessa ohjelma valittaa jos käyttäjänimi on tyhjä tai salasana liian lyhyt (täytyy olla vähintään 8 merkkiä).
-Vääränlaisen sähköpostin tai puhelinnumeron tapauksessa ei tule valitusta, mutta niitä ei hyväksytä, vaan pitää antaa oikeassa 
-muodossa oleva sähköposti (jotain.jotain@jotain.com) ja puhelinnumero (pelkkiä numeroita 10 kpl).
+sähköpostin pitää olla muotoa (jotain.jotain@jotain.com) ja puhelinnumeror täytyy sisältää pelkkiä numeroita 10 kpl.
 Kun käyttäjä on luotu, pääsee käyttäjäsivulle, josta voi nähdä omat tietonsa. Käyttäjäsivulle pääsee myös kirjautumalla käyttäjänimellä
 ja salasanalla.
+
+Käyttäjäsivulla voi tilata uuden kortin ja nähdä omien korttien tiedot.
 
 Sovellukseen voi kirjautua pääkäyttäjänä käyttämällä tunnusta Mainuser ja salasanaa MainuserPassword
   
