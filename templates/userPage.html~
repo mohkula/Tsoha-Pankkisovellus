@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% if session.username %}
 
+{% block body %}
 {%if info %}
 Tiedot:
 
@@ -19,7 +20,20 @@ Tiedot:
 <p>Olet kirjautunut nimellä {{ session.username }}</p>
 
 <input type="submit" value="Näytä tiedot">
+
+</form>
+
+
+<form action="/newCard" method="POST">
+
+
+
+<input type="submit" value="Tilaa uusi kortti">
 <a href="/logout">Kirjaudu ulos</a>
 
 </form>
+
+
+{% endblock %}
+
 {% endif %}

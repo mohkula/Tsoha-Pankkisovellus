@@ -18,4 +18,22 @@ def userPage():
 	
         return render_template("userInfo.html", info = user)
 
-return redirect("/")
+    return redirect("/")
+    
+    
+@app.route("/addCard", methods =["POST"])    
+def addCard():
+    if(session["username"]):
+		
+        username = session["username"]
+	
+        sql = "SELECT id FROM users WHERE username=:username"
+        result = db.session.execute(sql, {"username":username})
+        user_id = result.fetchone()    
+	
+        sql = """INSERT INTO cards (user_id, card_number, expirationDate)
+            VALUES (:user_id,:1234567899887665,:2021-12-02:)"""
+	
+    
+	
+    
