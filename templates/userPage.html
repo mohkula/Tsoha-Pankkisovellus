@@ -3,10 +3,6 @@
 
 {% block body %}
 
-
-
-
-
 <form action="/userPage" method="POST">
 
 <p>Olet kirjautunut nimellä {{ session.username }}</p>
@@ -18,16 +14,19 @@ Käyttäjätiedot:
 {% for i in info %}
 <li> {{ i }}
 {% endfor %}
-</ul>
-{% endif %}
+</ul>     
+
+{% else %}
+
 
 <input type="submit" value="Näytä tiedot">
 
+
+{% endif %}
+
 </form>
 
-
 <form action="/addCard" method="POST">
-
 
 
 <input type="submit" value="Tilaa uusi kortti">
