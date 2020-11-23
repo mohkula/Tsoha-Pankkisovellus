@@ -24,6 +24,23 @@ Käyttäjätiedot:
 
 {% endif %}
 
+
+{% if cardInfo %}
+Korttien tiedot:
+
+<ul>
+{% for i in cardInfo %}
+<li> {{ i }}
+{% endfor %}
+</ul> 
+
+{% else %}
+
+<a href="/showCards">Näytä kortit</a>
+
+{% endif %}
+
+
 </form>
 
 <form action="/addCard" method="POST">
