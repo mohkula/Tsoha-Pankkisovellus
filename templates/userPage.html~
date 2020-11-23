@@ -24,7 +24,7 @@ Tiedot:
 </form>
 
 
-<form action="/newCard" method="POST">
+<form action="/addCard" method="POST">
 
 
 

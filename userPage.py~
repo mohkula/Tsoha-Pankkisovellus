@@ -29,11 +29,18 @@ def addCard():
 	
         sql = "SELECT id FROM users WHERE username=:username"
         result = db.session.execute(sql, {"username":username})
-        user_id = result.fetchone()    
+        customer_id = result.fetchone()[0]    
 	
-        sql = """INSERT INTO cards (user_id, card_number, expirationDate)
-            VALUES (:user_id,:1234567899887665,:2021-12-02:)"""
-	
+        sql = """INSERT INTO cards (customer_id, card_number, expirationDate)
+            VALUES (:customer_id,:card_number,:expirationDate)"""
+            
+            
+        db.session.execute(sql, {"customer_id":customer_id,"card_number":1232343434545656,"expirationDate":"2021-12-21"})
+        db.session.commit()
+        
+            
+    return render_template("userInfo.html")
+
     
 	
     

@@ -2,6 +2,9 @@
 from flask import render_template, session, request, redirect
 from app import app
 from db import db
+import random
+
+
 
 @app.route("/userPage", methods =["POST"])
 def userPage():
@@ -16,7 +19,7 @@ def userPage():
 	
 	
 	
-        return render_template("userInfo.html", info = user)
+        return render_template("userPage.html", info = user)
 
     return redirect("/")
     
@@ -26,20 +29,32 @@ def addCard():
     if(session["username"]):
 		
         username = session["username"]
-	
+        
+        card_number = ""
+        for i in range(16):
+            card_number += str(random.randint(0,9))
+        
+        card_number = int(card_number)
+
+
         sql = "SELECT id FROM users WHERE username=:username"
         result = db.session.execute(sql, {"username":username})
         customer_id = result.fetchone()[0]    
 	
-        sql = """INSERT INTO cards (customer_id, card_number, expirationDate)
-            VALUES (:customer_id,:card_number,:expirationDate)"""
+        sql = """INSERT INTO cards (customer_id, card_number)
+            VALUES (:customer_id,:card_number)"""
             
             
-        db.session.execute(sql, {"customer_id":customer_id,"card_number":1232343434545656,"expirationDate":"2021-12-21"})
+        db.session.execute(sql, {"customer_id":customer_id,"card_number":card_number})
         db.session.commit()
         
+        sql = "UPDATE cards SET expirationdate = expirationdate + interval '4 years' WHERE card_number =:card_number "
+        db.session.execute(sql, {"card_number":card_number})
+        db.session.commit()
+        
+        
             
-    return render_template("userInfo.html")
+    return render_template("userPage.html")
 
     
 	

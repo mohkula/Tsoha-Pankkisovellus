@@ -2,15 +2,7 @@
 {% if session.username %}
 
 {% block body %}
-{%if info %}
-Tiedot:
 
-<ul>
-{% for i in info %}
-<li> {{ i }}
-{% endfor %}
-</ul>
-{% endif %}
 
 
 
@@ -18,6 +10,16 @@ Tiedot:
 <form action="/userPage" method="POST">
 
 <p>Olet kirjautunut nimellä {{ session.username }}</p>
+
+{%if info %}
+Käyttäjätiedot:
+
+<ul>
+{% for i in info %}
+<li> {{ i }}
+{% endfor %}
+</ul>
+{% endif %}
 
 <input type="submit" value="Näytä tiedot">
 
@@ -37,3 +39,5 @@ Tiedot:
 {% endblock %}
 
 {% endif %}
+
+
