@@ -1,4 +1,11 @@
 
+{% if error %}
+<div id="error" style="color:red">
+    <p><em>{{error}}</em></p>
+</div>
+{% endif %}
+
+
 {% extends "layout.html" %}
 
 {% if session.username %}
@@ -25,10 +32,19 @@ Asiakkaiden tiedot:
 
 <form action="/mainUserPage" method="POST">
 
-<input type="submit" value="Näytä asiakkaiden tietot">                   
-<a href="/logout">Kirjaudu ulos</a>
+<input type="submit" value="Näytä asiakkaiden tiedot">
+
 
 </form>
+
+<form action="/changeUserInfo" method="POST">
+
+
+<input type="submit" value="Muokkaa asiakkaan tietoja">
+<input type="Text" name="user" value="asiakkaan nimi"></p>
+<a href="/logout">Kirjaudu ulos</a>
+</form>
+
 
 {% endblock %}
 {% endif %}

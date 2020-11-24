@@ -22,3 +22,9 @@ def mainUserPage():
         return render_template("mainuserPage.html", info = userInfo)
     
     return redirect("/")
+    
+    
+@app.route("/changeUserInfo")
+def changeUserInfo():
+	
+    return render_template("mainuserPage.html", info = userInfo)

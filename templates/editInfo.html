@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<form action="/newUser" method="POST" onsubmit="return check(this)">
+<p>Muokkaa käyttäjän {{username}} tietoja:<br>
+
+<p>Tunnus:<br>
+<input type="Text" name="newUsername" value = {{username}}></p>
+<p>Sähköpostiosoite:<br>
+<input type="Text" name="emailAddress" value = {{currentEmail}} ></p>
+<p>Puhelinnumero:<br>
+<input type="Text" name="phoneNumber" value = {{currentPhone}} ></p>
+
+<p>Osoite:<br>
+<input type="Text" name="address"  value = {{currentAddress}}  ></p>
+
+
+
+</form>
+
+{% endblock %}
+
+
+
+
+
+
+<script>
+function check(form) {
+	
+	
+	
+    if (form.newUsername.value.length == 0) {
+        alert("Tunnus ei saa olla tyhjä!");
+        return false;
+    }
+    
+    
+    if (form.newPassword.value.length < 8) {
+        alert("Salasana liian lyhyt");
+        return false;
+    }
+    
+    return true;
+}
+</script>

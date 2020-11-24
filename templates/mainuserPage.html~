@@ -5,6 +5,7 @@
 
 
 
+{% block body %}
 
 {%if info %}
 Asiakkaiden tiedot:
@@ -24,8 +25,11 @@ Asiakkaiden tiedot:
 
 <form action="/mainUserPage" method="POST">
 
-<input type="submit" value="Näytä asiakkaiden tietot">                   
+<input type="submit" value="Näytä asiakkaiden tiedot">
+<a href="/changeUserInfo">Muokkaa käyttäjien tietoja</a>
 <a href="/logout">Kirjaudu ulos</a>
 
 </form>
+
+{% endblock %}
 {% endif %}
