@@ -5,6 +5,12 @@
 </div>
 {% endif %}
 
+{% if success %}
+<div id="error" style="color:green">
+    <p><em>{{success}}</em></p>
+</div>
+{% endif %}
+
 
 {% extends "layout.html" %}
 
@@ -34,6 +40,44 @@ Asiakkaiden tiedot:
 
 <input type="submit" value="Näytä asiakkaiden tiedot">
 
+</form>
+{% if message %}
+
+ {{ message }}
+
+ 
+ 
+<form action="/changeUsername" method="POST">
+
+
+ <input type="Text" name="user" value="asiakkaan nimi"></p>
+
+
+<input type="submit" value="Käyttäjänimi">
+</form>
+
+
+
+<form action="/changeEmail" method="POST">
+
+ <input type="Text" name="user" value="asiakkaan nimi"></p>
+
+<input type="submit" value="Sähköpostiosoite">
+</form>
+
+<form action="/changePhonenumber" method="POST">
+<input type="submit" value="puhelinnumero">
+</form>
+
+<form action="/changeAddress" method="POST">
+<input type="submit" value="osoite">
+
+
+</form>
+
+
+
+{% else %}
 
 </form>
 
@@ -41,9 +85,18 @@ Asiakkaiden tiedot:
 
 
 <input type="submit" value="Muokkaa asiakkaan tietoja">
-<input type="Text" name="user" value="asiakkaan nimi"></p>
-<a href="/logout">Kirjaudu ulos</a>
+
+
 </form>
+
+{% endif %}
+
+
+
+
+
+
+<a href="/logout">Kirjaudu ulos</a>
 
 
 {% endblock %}

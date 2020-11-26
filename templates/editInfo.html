@@ -1,29 +1,141 @@
+{% if error %}
+<div id="error" style="color:red">
+    <p><em>{{error}}</em></p>
+</div>
+{% endif %}
+
 {% extends "layout.html" %}
 
 {% block body %}
 
-<form action="/newUser" method="POST" onsubmit="return check(this)">
-<p>Muokkaa käyttäjän {{username}} tietoja:<br>
 
-<p>Tunnus:<br>
-<input type="Text" name="newUsername" value = {{username}}></p>
-<p>Sähköpostiosoite:<br>
-<input type="Text" name="emailAddress" value = {{currentEmail}} ></p>
-<p>Puhelinnumero:<br>
-<input type="Text" name="phoneNumber" value = {{currentPhone}} ></p>
 
-<p>Osoite:<br>
-<input type="Text" name="address"  value = {{currentAddress}}  ></p>
 
+
+{% if email%}
+
+
+
+<form action="/applyNewEmail" method="POST">
+
+
+
+
+
+
+Käyttäjänimi jonka sähköpostiosoitteen haluat muuttaa:
+<input type="Text" name ="user" ></p>
+
+Uusi sähköpostiosoite:
+<input type="Text" name ="email"></p>
+
+<input type="submit" value="muokkaa sähköpostiosoitetta">
+</form>
+
+
+
+{% elif username %}
+
+<form action="/applyNewUsername" method="POST">
+
+
+
+
+
+
+
+Käyttäjänimi jonka nimen haluat muuttaa:
+<input type="Text" name ="user" ></p>
+
+
+Uusi käyttäjänimi:
+<input type="Text" name ="newUser" ></p>
+
+<input type="submit" value="muokkaa käyttäjänimeä">
 
 
 </form>
 
+{% elif phoneNumber %}
+
+
+<form action="/applyNewPhonenumber" method="POST">
+
+
+
+
+
+
+
+
+Käyttäjänimi jonka puhelinnumeron haluat muuttaa:
+<input type="Text" name ="user" ></p>
+
+Uusi puhelinnumero:
+<input type="Text" name ="phoneNumber"></p>
+
+<input type="submit" value="muokkaa puhelinnumeroa">
+</form>
+
+{% elif address %}
+
+
+
+<form action="/applyNewAddress" method="POST">
+
+
+
+
+
+
+
+
+Käyttäjänimi jonka osoitteen haluat muuttaa:
+<input type="Text" name ="user" ></p>
+
+Uusi osoite:
+<input type="Text" name ="address"></p>
+
+<input type="submit" value="muokkaa osoitetta">
+</form>
+
+
+
+
+{% else %}
+
+<p>Mitä tietoa haluat muokata?<br>
+
+<form action="/changeUsername" method="POST">
+
+
+ 
+
+
+<input type="submit" value="Käyttäjänimi">
+</form>
+
+
+
+<form action="/changeEmail" method="POST">
+
+
+<input type="submit" value="Sähköpostiosoite">
+</form>
+
+<form action="/changePhonenumber" method="POST">
+<input type="submit" value="puhelinnumero">
+</form>
+
+<form action="/changeAddress" method="POST">
+<input type="submit" value="osoite">
+
+
+</form>
+
+
+{% endif %}
 {% endblock %}
-
-
-
-
 
 
 <script>
@@ -35,12 +147,7 @@ function check(form) {
         alert("Tunnus ei saa olla tyhjä!");
         return false;
     }
-    
-    
-    if (form.newPassword.value.length < 8) {
-        alert("Salasana liian lyhyt");
-        return false;
-    }
+   
     
     return true;
 }

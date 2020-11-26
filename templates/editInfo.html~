@@ -1,0 +1,45 @@
+{% if error %}
+<div id="error" style="color:red">
+    <p><em>{{error}}</em></p>
+</div>
+{% endif %}
+
+{% extends "layout.html" %}
+
+{% block body %}
+
+
+<p>Muokkaa käyttäjän {{username}} tietoja:<br>
+
+{% if email %}
+<form action="/addNewEmail" method="POST" onsubmit="return check(this)">
+
+ <input type="Text" name="email" value="uusi sähköposti osoite"></p>
+
+<input type="submit" value="Muokkaa sähköpostia">
+{% endif %}
+
+
+</form>
+
+{% endblock %}
+
+
+                   
+
+
+
+<script>
+function check(form) {
+	
+	
+	
+    if (form.newUsername.value.length == 0) {
+        alert("Tunnus ei saa olla tyhjä!");
+        return false;
+    }
+   
+    
+    return true;
+}
+</script>

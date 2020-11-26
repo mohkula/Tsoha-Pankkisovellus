@@ -1,7 +1,7 @@
 from flask import render_template, session, request, redirect
 from app import app
 from db import db
-
+import newUser
 
 
 
@@ -24,7 +24,162 @@ def mainUserPage():
     return redirect("/")
     
     
-@app.route("/changeUserInfo")
+@app.route("/changeUserInfo", methods =["POST"])
 def changeUserInfo():
+    if(session["username"] == "Mainuser"):
+        
+        
+        return render_template("mainuserPage.html", message = "Mitä tietoa haluat muuttaa?")
+        
+        
+        
+        
+        
+        
+       
+            
+        
+
+
+
+
+@app.route("/changeUsername", methods = ["POST"])
+def changeUsername():
+    if(session["username"] == "Mainuser"):
+        username = request.form["user"]
+        
+        
+        sql = "SELECT username FROM users WHERE username=:username"
+        result = db.session.execute(sql, {"username":username})
+        user = result.fetchone()   
+        
+        if(user == None):
+            return render_template("mainuserPage.html", error = ("Asiakasta ei löytynyt nimellä " + username))
+        
+        return render_template("editInfo.html", username = user)
+        
+
+@app.route("/changeEmail", methods = ["POST"])
+def changeEmail():
+    if(session["username"] == "Mainuser"):
+        print(1)
+        username = request.form["user"]
+        print(2)
+        sql = "SELECT email FROM users WHERE username=:username"
+        result = db.session.execute(sql, {"username":username})
+        email = result.fetchone()[0]
+        
+        return render_template("editInfo.html", email = email)
 	
-    return render_template("mainuserPage.html", info = userInfo)
+	
+    
+	
+	
+@app.route("/changePhonenumber", methods = ["POST"])
+def changePhonenumber():   	
+    if(session["username"] == "Mainuser"):
+    	
+        username = request.form["user"]
+        
+        sql = "phone FROM users WHERE username=:username"
+        result = db.session.execute(sql, {"username":username})
+        phoneNumber = result.fetchone()[0]
+        
+        return render_template("editInfo.html", phoneNumber = phoneNumber)
+	
+	
+	
+@app.route("/changeAddress", methods = ["POST"])
+def changeAddress():
+    if(session["username"] == "Mainuser"):
+    	
+        username = request.form["user"]
+        
+        sql = "address FROM users WHERE username=:username"
+        result = db.session.execute(sql, {"username":username})
+        address = result.fetchone()[0]
+        
+        return render_template("editInfo.html", address = address)
+
+
+
+
+
+@app.route("/addNewEmail", methods = ["POST"])
+def addNewEmail():
+    email = request.form["email"]
+    if newUser.isTooLong(email, 30):
+        return render_template("editInfo.html", error = "Sähköposti saa olla enintään 30 merkkiä")
+        
+    if not newUser.emailMatch(email):
+        return render_template("editInfo.html", error = "Sähköposti ei kelpaa")
+    
+    sql = "UPDATE users SET email =:email WHERE userneme =: oldUserName"
+            
+    db.session.execute(sql, {"email":email})
+    db.session.commit()    
+    
+    return render_template("mainuserPage.html")
+
+        
+
+@app.route("/applyChanges", methods =["POST"])
+def applyChanges():
+	
+    oldUserName = request.form["oldUsername"]
+    username = request.form["newUsername"]
+    email = request.form["emailAddress"]
+    phoneNumber = request.form["phoneNumber"]
+    address = request.form["address"]
+    
+    
+    
+    if len(username) == 0:
+        
+        return render_template("editInfo.html", error = "Käyttäjänimi ei saa olla tyhjä")
+        
+    if newUser.isTooLong(username, 10):
+        return render_template("editInfo.html", error = "Käyttäjänimi saa olla enintään 10 merkkiä")
+        
+    if newUser.isTooLong(email, 30):
+        return render_template("editInfo.html", error = "Sähköposti saa olla enintään 30 merkkiä")
+        
+    if newUser.isTooLong(address, 30):
+        return render_template("editInfo.html", error = "Osoite saa olla enintään 30 merkkiä")
+    
+    
+
+    	
+    if not newUser.emailMatch(email):
+    	return render_template("editInfo.html", error = "Sähköposti ei kelpaa")
+   
+    if len(phoneNumber) != 10 or not phoneNumber.isdigit():
+    	
+    	return render_template("editInfo.html", error = "Puhelinnumero ei kelpaa, täytyy olla 10 numeroa")
+    	
+    if len(address) == 0:
+        return render_template("editInfo.html", error = "Osoite ei saa olla tyhjä")
+       
+       
+    sql = "SELECT username FROM users WHERE username=:username"
+    result = db.session.execute(sql, {"username":username})
+    user = result.fetchone()    
+    
+    if user != None:
+        return render_template("editInfo.html", error = "Käyttäjänimi on jo olemassa")
+    
+    
+    
+    sql = """UPDATE users SET username =:username, email =:email, phone =:phoneNumber, address =:address
+    WHERE userneme =: oldUserName"""
+            
+    db.session.execute(sql, {"username":username, "email":email,"phone":phoneNumber,"address":address})
+    db.session.commit()
+        
+    
+        
+
+    
+    
+    
+
