@@ -33,9 +33,14 @@ def showCards():
         sql = "SELECT card_number, expirationdate FROM cards WHERE customer_id= (SELECT id FROM users WHERE username =:username)"
         result = db.session.execute(sql, {"username":username})
         card_info = result.fetchall()
+        card_infoList = []
+        print(type(card_info))
+        for i in card_info:
+            card_infoList.append(("kortin numero: " +str(i[0]),"kortin voimassaoloaika: " + str(i[1])))
+            
+             
 	
-	
-        return render_template("userPage.html", cardInfo = card_info)
+        return render_template("userPage.html", cardInfo = card_infoList)
 
     return redirect("/")
 

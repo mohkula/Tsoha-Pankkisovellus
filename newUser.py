@@ -35,6 +35,10 @@ def newUser():
     if len(username) == 0:
         
         return render_template("createUser.html", error = "Käyttäjänimi ei saa olla tyhjä")
+
+    if len(password) == 0:
+        
+        return render_template("createUser.html", error = "Salasana ei saa olla tyhjä")
         
     if isTooLong(username, 10):
         return render_template("createUser.html", error = "Käyttäjänimi saa olla enintään 10 merkkiä")
@@ -78,8 +82,8 @@ def newUser():
         
             session["username"] = username
         else:
-            print("password too short")
-            return render_template("createUser.html")
+            
+            return render_template("createUser.html",error = "Saĺasana liian lyhyt")
 
   
     else:

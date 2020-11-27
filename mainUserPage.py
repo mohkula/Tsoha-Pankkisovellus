@@ -7,8 +7,8 @@ import newUser
 
 
 
-@app.route("/mainUserPage", methods =["POST"])
-def mainUserPage():
+@app.route("/showCustomerInfo", methods =["POST"])
+def showCustomerInfo():
     
     if(session["username"] == "Mainuser"):
         
@@ -56,11 +56,11 @@ def applyNewUsername():
             return render_template("editInfo.html", error = ("Asiakasta ei löytynyt nimellä " + username))
         
                 
-        if len(username) == 0:
+        if len(newUsername) == 0:
         
             return render_template("editInfo.html", error = "Käyttäjänimi ei saa olla tyhjä")
         
-        if newUser.isTooLong(username, 10):
+        if newUser.isTooLong(newUsername, 10):
             return render_template("editInfo.html", error = "Käyttäjänimi saa olla enintään 10 merkkiä")
             
             
