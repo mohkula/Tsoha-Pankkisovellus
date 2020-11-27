@@ -27,3 +27,9 @@ def addMainUser():
     db.session.execute(sql)
     db.session.commit()
     
+    
+
+@app.route("/mainuserPage")
+def mainUserPage():
+
+    return render_template("mainuserPage.html")

@@ -11,13 +11,13 @@ import re
 app = Flask(__name__)
 app.secret_key = getenv("SECRET_KEY")
 
+
                                                                     
 from newUser import newUser
 import routes
 from login import login
-from mainUserPage import mainUserPage
+import mainUserPage
 from createNewUser import createNewUser		
-
 
 
     
