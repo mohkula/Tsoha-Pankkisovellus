@@ -12,7 +12,7 @@ def showCustomerInfo():
     
     if(session["username"] == "Mainuser"):
         
-        sql = "SELECT email, phone, address FROM users WHERE username <> 'Mainuser'"
+        sql = "SELECT username, email, phone, address FROM users WHERE username <> 'Mainuser'"
         result = db.session.execute(sql)
         userInfo = result.fetchall()
     

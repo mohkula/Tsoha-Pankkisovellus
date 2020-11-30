@@ -34,7 +34,6 @@ def showCards():
         result = db.session.execute(sql, {"username":username})
         card_info = result.fetchall()
         card_infoList = []
-        print(type(card_info))
         for i in card_info:
             card_infoList.append(("kortin numero: " +str(i[0]),"kortin voimassaoloaika: " + str(i[1])))
             
