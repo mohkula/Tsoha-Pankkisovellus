@@ -6,6 +6,7 @@ from app import app
 from werkzeug.security import check_password_hash, generate_password_hash
 import re
 from userPage import userPage
+import random
     
 def emailMatch(email):
     pattern = '^[a-zA-Z0-9]+[\._]?[a-zA-Z0-9]+[@]\w+[.]\w{2,3}$'
@@ -23,7 +24,29 @@ def isTooLong(info,max_length):
         return True        
     
     return False
+  
+def newBankAccount(username):
+
+    account_number = "FI"
+
+    for i in range(2):
+        account_number += str(random.randint(0,9))
+    
+    for i in range(14):
+        if i % 4 == 0:
+            account_number += " "
+        account_number += str(random.randint(0,9))
         
+
+  
+
+    sql = """INSERT INTO bankAccounts (customer_id ,account_number)
+            VALUES ((SELECT id FROM users WHERE username =:username),:account_number)"""    
+
+    db.session.execute(sql, {"username":username, "account_number":account_number})
+    db.session.commit()
+
+
 @app.route("/newUser", methods =["POST"])
 def newUser():
     username = request.form["newUsername"]
@@ -92,5 +115,7 @@ def newUser():
     
   
     
-    return render_template("userPage.html")   
+
+    newBankAccount(username)
+    return render_template("userPage.html",success = "Käyttäjä luotu onnistuneesti")   
     
