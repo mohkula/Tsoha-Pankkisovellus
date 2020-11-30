@@ -24,6 +24,30 @@ def userPage():
     return redirect("/")
     
 
+
+def newBankAccount(card_number):
+
+    account_number = "FI"
+
+    for i in range(2):
+        account_number += str(random.randint(0,9))
+    
+    for i in range(14):
+        if i % 4 == 0:
+            account_number += " "
+        account_number += str(random.randint(0,9))
+        
+
+  
+
+    sql = """INSERT INTO bankAccounts (card_id, account_number)
+            VALUES ((SELECT id FROM cards WHERE card_number =:card_number),:account_number)"""    
+
+    db.session.execute(sql, {"card_number":card_number,"account_number":account_number})
+    db.session.commit()
+
+
+
 @app.route("/showCards")
 def showCards():
     if(session["username"]):
@@ -70,8 +94,10 @@ def addCard():
         sql = "UPDATE cards SET expirationdate = expirationdate + interval '4 years' WHERE card_number =:card_number "
         db.session.execute(sql, {"card_number":card_number})
         db.session.commit()
+
+        newBankAccount(card_number)
         
-        return render_template("userPage.html")
+        return render_template("userPage.html", success = "Kortti tilattu")
     
     return redirect("/")    
             

@@ -1,3 +1,11 @@
+
+{% if success %}
+<div id="error" style="color:green">
+    <p><em>{{success}}</em></p>
+</div>
+{% endif %}
+
+
 {% extends "layout.html" %}
 {% if session.username %}
 
