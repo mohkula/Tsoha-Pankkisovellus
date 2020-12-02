@@ -33,3 +33,13 @@ def addMainUser():
 def mainUserPage():
 
     return render_template("mainuserPage.html")
+
+
+
+@app.route("/logout")
+def logout():
+    del session["username"]
+    
+    return redirect("/")
+
+    
