@@ -47,6 +47,16 @@ def newBankAccount(username):
     db.session.commit()
 
 
+
+
+def orderUser(username):
+    sql = "INSERT INTO orders (type,username) VALUES (0, :username )"
+            
+    db.session.execute(sql,{"username":username})
+    db.session.commit()
+
+
+
 @app.route("/newUser", methods =["POST"])
 def newUser():
     username = request.form["newUsername"]
@@ -54,6 +64,7 @@ def newUser():
     email = request.form["emailAddress"]
     phoneNumber = request.form["phoneNumber"]
     address = request.form["address"]
+    
     
     if len(username) == 0:
         
@@ -115,7 +126,7 @@ def newUser():
     
   
     
-
+    orderUser(username)
     newBankAccount(username)
     return render_template("userPage.html",success = "Käyttäjä luotu onnistuneesti")   
     

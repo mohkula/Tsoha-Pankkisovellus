@@ -19,7 +19,7 @@ def showCustomerInfo():
     
     
     
-        return render_template("mainuserPage.html", info = userInfo)
+        return render_template("mainuserPage.html", userInfo = userInfo)
     
     return redirect("/")
     
@@ -197,6 +197,71 @@ def changeAddress():
         return render_template("editInfo.html", address = "osoite")
 
 
+
+
+@app.route("/showCardOrders", methods = ["POST"])
+def showCardOrders():
+
+    if(session["username"] == "Mainuser"):
+        
+        sql = "SELECT customer_id, orderingDate FROM orders WHERE type = 1"
+        result = db.session.execute(sql)
+        orderInfo = result.fetchall()
+
+        if orderInfo == None:
+            return render_template("mainuserPage.html", error = "Ei tilattuja kortteja")
+
+
+
+        orderInfoList = []
+        for i in orderInfo:
+            orderer = getUsername(int(i[0]))
+
+            orderInfoList.append(("asiakas " + str(orderer) + " on tilannut kortin " + str(i[1])))
+    
+    
+    
+    
+        return render_template("mainuserPage.html", cardOrderInfo = orderInfoList)
+    
+    return redirect("/")
+
+
+@app.route("/showAccountOrders", methods = ["POST"])
+def showAccountOrders():
+
+    if(session["username"] == "Mainuser"):
+        
+        sql = "SELECT username, orderingDate FROM orders WHERE type = 0"
+        result = db.session.execute(sql)
+        orderInfo = result.fetchall()
+
+        if orderInfo == None:
+            return render_template("mainuserPage.html", error = "Ei tilattuja Käyttäjiä")
+
+        orderInfoList = []
+        for i in orderInfo:
+            newUsername = str(i[0])
+
+            orderInfoList.append(("Uusi käyttäjä nimellä " + str(newUsername) + " tilattu " + str(i[1])))
+    
+    
+    
+    
+        return render_template("mainuserPage.html", accountOrderInfo = orderInfoList)
+    
+    return redirect("/")
+
+
+
+def getUsername(customer_id):
+    ci = customer_id
+    sql = "SELECT username FROM users WHERE id =:customer_id"
+
+    result = db.session.execute(sql,{"customer_id":ci})
+    
+      
+    return result.fetchone()[0]
 
 
 

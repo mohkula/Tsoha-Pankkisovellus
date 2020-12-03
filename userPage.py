@@ -46,12 +46,21 @@ def showCards():
 
     return redirect("/")
 
+
+
+def orderCard(username):
+    sql = """INSERT INTO orders (type, customer_id)
+        VALUES (1,  (SELECT id from users WHERE username =:username))"""
+            
+    db.session.execute(sql, {"username":username})
+    db.session.commit()
+
 @app.route("/addCard", methods =["POST"])    
 def addCard():
     if(session["username"]):
 		
         username = session["username"]
-        
+        orderCard(username)
         card_number = ""
         for i in range(16):
             card_number += str(random.randint(0,9))

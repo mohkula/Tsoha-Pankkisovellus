@@ -1,5 +1,4 @@
-	CREATE TABLE users (id SERIAL PRIMARY KEY, username TEXT, password TEXT,
- email TEXT, phone INTEGER, address TEXT, mainUser BOOLEAN NOT NULL DEFAULT FALSE);
+	CREATE TABLE users (id SERIAL PRIMARY KEY, username TEXT, password TEXT, email TEXT, phone BIGINT, address TEXT, mainUser BOOLEAN NOT NULL DEFAULT FALSE);
 
  CREATE TABLE cards (id SERIAL PRIMARY KEY, customer_id INTEGER, account_id INTEGER , card_number BIGINT, expirationDate DATE DEFAULT now());
 
@@ -9,3 +8,4 @@
 
 
 
+CREATE TABLE orders(id SERIAL PRIMARY KEY, type INTEGER , customer_id INTEGER NOT NULL DEFAULT 0, username TEXT, orderingDate DATE DEFAULT now())

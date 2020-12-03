@@ -20,11 +20,22 @@
 
 {% block body %}
 
-{%if info %}
+{%if userInfo %}
 Asiakkaiden tiedot:
 
 <ul>
-{% for i in info %}
+{% for i in userInfo %}
+<li> {{ i }}
+{% endfor %}
+</ul>
+{% endif %}
+
+
+{%if cardOrderInfo %}
+Korttien tilaukset:
+
+<ul>
+{% for i in cardOrderInfo %}
 <li> {{ i }}
 {% endfor %}
 </ul>
@@ -32,7 +43,15 @@ Asiakkaiden tiedot:
 
 
 
+{%if accountOrderInfo %}
+Uusien käyttäjien tilaukset:
 
+<ul>
+{% for i in accountOrderInfo %}
+<li> {{ i }}
+{% endfor %}
+</ul>
+{% endif %}
 
 
 
@@ -57,8 +76,23 @@ Asiakkaiden tiedot:
 </form>
 
 
+</form>
+
+<form action="/showCardOrders" method="POST">
 
 
+<input type="submit" value="Näytä tilatut kortit">
+
+
+</form>
+
+<form action="/showAccountOrders" method="POST">
+
+
+<input type="submit" value="Näytä tilatut käyttäjät">
+
+
+</form>
 
 
 

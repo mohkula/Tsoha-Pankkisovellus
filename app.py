@@ -23,10 +23,4 @@ from createNewUser import createNewUser
     
 
 
-@app.route("/logout")
-def logout():
-    del session["username"]
-    
-    return redirect("/")
 
-    
