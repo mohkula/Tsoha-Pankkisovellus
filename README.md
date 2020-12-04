@@ -12,6 +12,8 @@ Käyttäjäsivulla voi tilata uuden kortin ja nähdä omien korttien tiedot.
 
 Sovellukseen voi kirjautua pääkäyttäjänä käyttämällä tunnusta Mainuser ja salasanaa MainuserPassword. Main user voi muokata olemassa olevien asiakkaiden
 tietoja.
+
+Pääkäyttäjä voi nähdä tilatut kortit ja käyttäjät sekä hyväksyä ne.
   
 Ohjelmaa pääsee kokeilemaan tästä linkistä:
 https://tsoha-bank.herokuapp.com/
