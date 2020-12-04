@@ -25,7 +25,7 @@ def login():
     
         
     
-    sql = "SELECT password FROM users WHERE username=:username"
+    sql = "SELECT password FROM users WHERE username=:username AND active = 't'"
     result = db.session.execute(sql, {"username":username})
     user = result.fetchone()    
     if user == None:
@@ -41,7 +41,6 @@ def login():
         	
         session["username"] = username
         if(isMainuser(username)):
-        	print("on main user")
         	return render_template("mainuserPage.html")
         	
         	

@@ -32,25 +32,93 @@ Asiakkaiden tiedot:
 
 
 {%if cardOrderInfo %}
-Korttien tilaukset:
+
+<form action="/acceptSelectedCards" method="POST">
+
+
+
+Uusien korttien tilaukset:
 
 <ul>
 {% for i in cardOrderInfo %}
+
+
+
 <li> {{ i }}
 {% endfor %}
 </ul>
+
+
+
+
+Valitse Käyttäjien nimet joiden kortit hyväksytään:
+<ul>
+{% for i in cardOrdererNameList %}
+
+
+
+<input type="checkbox" name="usersCards" value= {{i}}> {{i}}
+
+
+{% endfor %}
+</ul>
+
+
+
+<input type="submit" value="Hyväksy valittujen käyttäjien kortit">
+
+</form>
+
+
+
 {% endif %}
 
 
 
 {%if accountOrderInfo %}
+
+
+<form action="/acceptSelectedCustomers" method="POST">
+
+
+
 Uusien käyttäjien tilaukset:
 
 <ul>
 {% for i in accountOrderInfo %}
+
+
+
 <li> {{ i }}
 {% endfor %}
 </ul>
+
+
+
+
+Valitse käyttäjät jotka hyväksytään:
+<ul>
+{% for i in usernameList %}
+
+
+
+<input type="checkbox" name="users" value= {{i}}> {{i}}
+
+
+{% endfor %}
+</ul>
+
+
+
+<input type="submit" value="Hyväksy valitut käyttäjät">
+
+</form>
+
+
+
+
+
+
 {% endif %}
 
 

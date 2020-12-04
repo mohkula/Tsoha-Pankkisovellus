@@ -214,15 +214,18 @@ def showCardOrders():
 
 
         orderInfoList = []
+        usernameList = []
+
         for i in orderInfo:
             orderer = getUsername(int(i[0]))
 
             orderInfoList.append(("asiakas " + str(orderer) + " on tilannut kortin " + str(i[1])))
+            usernameList.append(str(orderer))
+
     
     
     
-    
-        return render_template("mainuserPage.html", cardOrderInfo = orderInfoList)
+        return render_template("mainuserPage.html", cardOrderInfo = orderInfoList, cardOrdererNameList = usernameList)
     
     return redirect("/")
 
@@ -240,15 +243,16 @@ def showAccountOrders():
             return render_template("mainuserPage.html", error = "Ei tilattuja Käyttäjiä")
 
         orderInfoList = []
+        usernameList = []
         for i in orderInfo:
             newUsername = str(i[0])
 
             orderInfoList.append(("Uusi käyttäjä nimellä " + str(newUsername) + " tilattu " + str(i[1])))
+            usernameList.append(str(newUsername))
+        
     
     
-    
-    
-        return render_template("mainuserPage.html", accountOrderInfo = orderInfoList)
+        return render_template("mainuserPage.html", accountOrderInfo = orderInfoList, usernameList = usernameList)
     
     return redirect("/")
 
@@ -267,13 +271,62 @@ def getUsername(customer_id):
 
 
 
-        
 
 
+
+
+@app.route("/acceptSelectedCards", methods = ["POST"])
+def acceptSelectedCards():
+    
+    checkBox = request.form.getlist('usersCards')
+   
+    for i in checkBox:
+        verifyCard(i)
+
+    return render_template("mainuserPage.html")
+
+
+def verifyCard(username):
+    if(username == 0):
+        return
+
+    sql = "UPDATE cards SET active = TRUE WHERE customer_id = (SELECT id FROM users WHERE username =:username)"   
         
     
-        
+    db.session.execute(sql, {"username":username})
+    db.session.commit()
 
+    sql = "DELETE FROM orders WHERE type = 1 AND id = (SELECT id FROM users WHERE username =:username)"    
+    db.session.execute(sql, {"username":username})
+    db.session.commit()
+
+
+
+
+@app.route("/acceptSelectedCustomers", methods = ["POST"])
+def acceptSelectedCustomers():
+    
+    checkBox = request.form.getlist('users')
+   
+    for i in checkBox:
+        verifyUser(i)
+
+    return render_template("mainuserPage.html")
+
+
+def verifyUser(username):
+    if(username == 0):
+        return
+
+    sql = "UPDATE users SET active = TRUE WHERE username =:username"   
+        
+    
+    db.session.execute(sql, {"username":username})
+    db.session.commit()
+
+    sql = "DELETE FROM orders WHERE username =:username AND type = 0"    
+    db.session.execute(sql, {"username":username})
+    db.session.commit()
     
     
     
