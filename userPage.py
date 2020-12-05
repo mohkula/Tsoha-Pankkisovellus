@@ -33,7 +33,7 @@ def showCards():
 		
         username = session["username"]
 
-        sql = "SELECT card_number, expirationdate FROM cards WHERE customer_id= (SELECT id FROM users WHERE username =:username)"
+        sql = "SELECT card_number, expirationdate FROM cards WHERE customer_id= (SELECT id FROM users WHERE username =:username) AND active = TRUE"
         result = db.session.execute(sql, {"username":username})
         card_info = result.fetchall()
         card_infoList = []

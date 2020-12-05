@@ -296,7 +296,7 @@ def verifyCard(username):
     db.session.execute(sql, {"username":username})
     db.session.commit()
 
-    sql = "DELETE FROM orders WHERE type = 1 AND id = (SELECT id FROM users WHERE username =:username)"    
+    sql = "DELETE FROM orders WHERE type = 1 AND customer_id = (SELECT id FROM users WHERE username =:username)"    
     db.session.execute(sql, {"username":username})
     db.session.commit()
 

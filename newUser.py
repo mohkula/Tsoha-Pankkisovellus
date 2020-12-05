@@ -114,7 +114,7 @@ def newUser():
             :email,"phone":phoneNumber,"address":address})
             db.session.commit()
         
-            session["username"] = username
+           # session["username"] = username
         else:
             
             return render_template("createUser.html",error = "Saĺasana liian lyhyt")
@@ -128,5 +128,5 @@ def newUser():
     
     orderUser(username)
     newBankAccount(username)
-    return render_template("userPage.html",success = "Käyttäjä luotu onnistuneesti")   
+    return render_template("index.html",success = "Käyttäjä tilattu")   
     
