@@ -1,0 +1,27 @@
+
+{% extends "layout.html" %}
+{% block body %}
+
+
+<form action="/" method="POST">
+
+Valitse syy:
+<select name="lost">
+<option value="l" selected> kortti on kadonnut
+<option value="s"> kortti on varastettu
+
+</select>
+
+kadonneen kortin numero:
+
+<input type="text" name="lostCard"></p>
+
+
+<input type="submit" value="Tee ilmoitus">
+
+<a href="/mainuserPage">Takaisin</a>
+
+
+
+
+{% endblock %}

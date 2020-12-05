@@ -90,6 +90,10 @@ def addCard():
             
     
 
+@app.route("/reportMissingCard", methods = ["POST"])
+def reportMissingCard():
+
+    return render_template("reportMissingCard.html")
     
 	
     
