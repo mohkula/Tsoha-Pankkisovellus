@@ -3,6 +3,8 @@ from app import app
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask import render_template, session, redirect, request
 
+import routes
+import userPage
 
 
 def isMainuser(username):

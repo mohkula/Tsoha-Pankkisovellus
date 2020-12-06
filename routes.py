@@ -36,6 +36,13 @@ def mainUserPage():
 
 
 
+@app.route("/userPage")
+def userPage():
+
+    return render_template("userPage.html")
+
+
+
 @app.route("/logout")
 def logout():
     del session["username"]

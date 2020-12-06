@@ -5,7 +5,6 @@ from flask import request, render_template, session, redirect
 from app import app
 from werkzeug.security import check_password_hash, generate_password_hash
 import re
-from userPage import userPage
 import random
     
 def emailMatch(email):

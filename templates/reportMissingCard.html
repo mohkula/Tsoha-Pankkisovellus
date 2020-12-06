@@ -1,14 +1,21 @@
 
+{% if error %}
+<div id="error" style="color:red">
+    <p><em>{{error}}</em></p>
+</div>
+{% endif %}
+
+
 {% extends "layout.html" %}
 {% block body %}
 
 
-<form action="/" method="POST">
+<form action="/addCardReport" method="POST">
 
 Valitse syy:
-<select name="lost">
-<option value="l" selected> kortti on kadonnut
-<option value="s"> kortti on varastettu
+<select name="type">
+<option value="0" selected> kortti on kadonnut
+<option value="1"> kortti on varastettu
 
 </select>
 
@@ -19,7 +26,7 @@ kadonneen kortin numero:
 
 <input type="submit" value="Tee ilmoitus">
 
-<a href="/mainuserPage">Takaisin</a>
+<a href="/userPage">Takaisin</a>
 
 
 

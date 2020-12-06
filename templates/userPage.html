@@ -6,12 +6,19 @@
 {% endif %}
 
 
+{% if error %}
+<div id="error" style="color:red">
+    <p><em>{{error}}</em></p>
+</div>
+{% endif %}
+
+
 {% extends "layout.html" %}
 {% if session.username %}
 
 {% block body %}
 
-<form action="/userPage" method="POST">
+<form action="/ShowUserInfo" method="POST">
 
 <p>Olet kirjautunut nimellä {{ session.username }}</p>
 
@@ -45,8 +52,7 @@ Korttien tiedot:
 {% endfor %}
 </ul> 
 
-<form action="/-" method="POST">
-<input type="submit", value="Tee ilmoitus kadonneesta kortista">
+
 
 </form>
 {% else %}

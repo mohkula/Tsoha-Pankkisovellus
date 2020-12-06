@@ -6,8 +6,8 @@ import random
 
 
 
-@app.route("/userPage", methods =["POST"])
-def userPage():
+@app.route("/ShowUserInfo", methods =["POST"])
+def ShowUserInfo():
 	
     if(session["username"]):
 		
@@ -97,3 +97,58 @@ def reportMissingCard():
     
 	
     
+
+@app.route("/addCardReport", methods = ["POST"])
+def addCardReport():
+    card_number = request.form["lostCard"]
+
+
+    if not card_number.isdigit():
+        return render_template("reportMissingCard.html", error = "Antamasi kortin numero ei kelpaa")
+
+
+
+    if not isUsersCard(card_number):
+        return render_template("reportMissingCard.html", error = "Korteistasi ei löydy korttia numerolla: " + card_number)
+
+
+    type = int(request.form["type"])
+
+
+
+
+
+    sql = """INSERT INTO cardWarnings (card_id,type)
+        VALUES ((SELECT id from cards WHERE card_number =:card_number),:type)"""
+
+    db.session.execute(sql, {"card_number":card_number,"type":type})
+    db.session.commit()
+
+    return render_template("userPage.html", success = "Kortti raportoitu")
+
+def isUsersCard(card_number):
+
+
+    username = session["username"]
+    
+    sql = "SELECT customer_id FROM cards WHERE card_number =:card_number"
+
+    result = db.session.execute(sql, {"card_number":card_number})
+   
+    customer_id = result.fetchone()
+
+
+    if customer_id == None:
+        return False
+    
+    customer_id 
+
+    sql = "SELECT id FROM users WHERE username =:username"
+
+    result = db.session.execute(sql, {"username":username})
+
+    if result.fetchone()[0] == customer_id[0]:
+        return True
+
+    return False
+
