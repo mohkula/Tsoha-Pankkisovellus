@@ -152,3 +152,22 @@ def isUsersCard(card_number):
 
     return False
 
+
+@app.route("/showBankAccount", methods = ["POST"])
+def showBankAccount():
+    if(session["username"]):
+        
+        username = session["username"]
+
+        sql = "SELECT account_number, balance, openingdate FROM bankAccounts WHERE customer_id= (SELECT id FROM users WHERE username =:username) AND active = TRUE"
+        result = db.session.execute(sql, {"username":username})
+        bank_info = result.fetchall()
+        bank_infoList = []
+        for i in bank_info:
+            bank_infoList.append("tilinumero: " +str(i[0]) + " saldo: " + str(i[1]) + " avattu: " + str(i[2]))
+            
+             
+        
+        return render_template("userPage.html", bankAccountInfo = bank_infoList)
+
+    return redirect("/")

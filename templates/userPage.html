@@ -62,6 +62,23 @@ Korttien tiedot:
 {% endif %}
 
 
+
+
+{% if bankAccountInfo %}
+
+
+
+Tilitiedot:
+
+<ul>
+{% for i in bankAccountInfo %}
+<li> {{ i }} 
+{% endfor %}
+</ul> 
+
+{% endif %}
+
+
 </form>
 
 
@@ -75,9 +92,18 @@ Korttien tiedot:
 
 
 <input type="submit" value="Tilaa uusi kortti">
+
+</form>
+
+
+<form action="/showBankAccount" method="POST">
+
+
+<input type="submit" value="näytä tilitiedot">
 <a href="/logout">Kirjaudu ulos</a>
 
 </form>
+
 
 
 {% endblock %}

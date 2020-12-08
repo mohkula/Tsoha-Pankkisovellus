@@ -302,6 +302,13 @@ def verifyCard(username):
     db.session.execute(sql, {"username":username})
     db.session.commit()
 
+
+    sql = "UPDATE bankAccounts SET active = TRUE WHERE customer_id = (SELECT id FROM users WHERE username =:username)"   
+        
+    
+    db.session.execute(sql, {"username":username})
+    db.session.commit()
+
     sql = "DELETE FROM orders WHERE type = 1 AND customer_id = (SELECT id FROM users WHERE username =:username)"    
     db.session.execute(sql, {"username":username})
     db.session.commit()
