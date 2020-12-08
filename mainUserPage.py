@@ -269,8 +269,14 @@ def getUsername(customer_id):
 
 
 
+def getCard(card_id):
+    ci = card_id
+    sql = "SELECT card_number FROM cards WHERE id =:card_id"
 
-
+    result = db.session.execute(sql,{"card_id":ci})
+    
+      
+    return result.fetchone()[0]
 
 
 
@@ -328,6 +334,34 @@ def verifyUser(username):
     db.session.execute(sql, {"username":username})
     db.session.commit()
     
+@app.route("/showWarnings", methods = ["POST"])
+def showWarnings():
+    sql = "SELECT card_id, type, date  FROM cardwarnings ORDER BY type DESC"
+
+    result = db.session.execute(sql)
+    warnings = result.fetchall()
+
+    if warnings == None:
+        return render_template("mainuserPage.html", error = "Ei varoituksia")
+
+
+    warningList = []
+        
+    for i in warnings:
+
+        if(int(i[1]) == 1):
+            message = " on varastettu"
+
+        elif(int(i[1]) == 0):
+            message = " on kadonnut"
+            
+
+        warningList.append("kortti " + str(getCard(i[0])) + message + ", ilmoitettu: " + str(i[2])    )
+            
+        
+    
+    
+    return render_template("mainuserPage.html", warnings = warningList)
     
     
 

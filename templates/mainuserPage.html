@@ -121,6 +121,29 @@ Valitse käyttäjät jotka hyväksytään:
 
 {% endif %}
 
+{%if warnings %}
+
+
+
+
+Uusien korttien tilaukset:
+
+<ul>
+{% for i in warnings %}
+
+
+
+<li> {{ i }}
+{% endfor %}
+</ul>
+
+
+
+{% endif %}
+
+
+
+
 
 
 <form action="/showCustomerInfo" method="POST">
@@ -162,7 +185,13 @@ Valitse käyttäjät jotka hyväksytään:
 
 </form>
 
+<form action="/showWarnings" method="POST">
 
+
+<input type="submit" value="Näytä kortteihin liittyvät varoitukset">
+
+
+</form>
 
 
 <a href="/logout">Kirjaudu ulos</a>
