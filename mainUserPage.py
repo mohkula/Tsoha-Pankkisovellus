@@ -91,7 +91,7 @@ def changeUsername():
 @app.route("/applyNewEmail", methods = ["POST"])
 def applyNewEmail():
     if(session["username"] == "Mainuser"):
-apply
+
         username = request.form["user"]
         if not usernameExists(username):
                 return render_template("editInfo.html", error = "Käyttäjänimeä ei ole olemassa")
