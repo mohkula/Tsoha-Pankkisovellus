@@ -33,7 +33,7 @@ def changeUserInfo():
         
         
 def usernameExists(username):
-    sql = "SELECT username FROM users WHERE username=:username"
+    sql = "SELECT username FROM users WHERE username=:username AND active = TRUE"
     result = db.session.execute(sql, {"username":username})
     user = result.fetchone()    
     
@@ -48,7 +48,7 @@ def applyNewUsername():
     if(session["username"] == "Mainuser"):
         username = request.form["user"]
         newUsername = request.form["newUser"]
-        sql = "SELECT username FROM users WHERE username=:username"
+        sql = "SELECT username FROM users WHERE username=:username AND active = TRUE"
         result = db.session.execute(sql, {"username":username})
         user = result.fetchone()   
         
@@ -91,7 +91,7 @@ def changeUsername():
 @app.route("/applyNewEmail", methods = ["POST"])
 def applyNewEmail():
     if(session["username"] == "Mainuser"):
-
+apply
         username = request.form["user"]
         if not usernameExists(username):
                 return render_template("editInfo.html", error = "Käyttäjänimeä ei ole olemassa")
@@ -324,7 +324,7 @@ def acceptSelectedCustomers():
     for i in checkBox:
         verifyUser(i)
 
-    return render_template("mainuserPage.html")
+    return render_template("mainuserPage.html", success = "Valitut käyttäjät hyväksytty")
 
 
 def verifyUser(username):

@@ -22,11 +22,11 @@
 
 <p>Olet kirjautunut nimellä {{ session.username }}</p>
 
-{%if info %}
+{%if user_info %}
 Käyttäjätiedot:
 
 <ul>
-{% for i in info %}
+{% for i in user_info %}
 <li> {{ i }}
 {% endfor %}
 </ul>     

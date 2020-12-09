@@ -15,11 +15,16 @@ def ShowUserInfo():
 
         sql = "SELECT username, email, phone, address FROM users WHERE username=:username"
         result = db.session.execute(sql, {"username":username})
-        user = result.fetchone()    
+         
 	
+        user_info = result.fetchall()
+        user_infoList = []
+        for i in user_info:
+            user_infoList.append("Käyttäjänimi: " + str(i[0]) + ", Sähköpostiosoite: " + str(i[1]) + ", Puhelinnumero " + str(i[2]) + ", Osoite: " + str(i[3]) )
+
+
 	
-	
-        return render_template("userPage.html", info = user)
+        return render_template("userPage.html", user_info = user_infoList)
 
     return redirect("/")
     
@@ -46,21 +51,36 @@ def showCards():
 
     return redirect("/")
 
+def userHasOrderedCard(username):
+    sql = "Select customer_id FROM orders WHERE customer_id = (SELECT id from users WHERE username =:username)"
+    result = db.session.execute(sql, {"username":username})
+
+    b = result.fetchone()
+    if b == None:
+        return False
+    return True
 
 
 def orderCard(username):
+    if userHasOrderedCard(username):
+        return False
+
     sql = """INSERT INTO orders (type, customer_id)
         VALUES (1,  (SELECT id from users WHERE username =:username))"""
             
     db.session.execute(sql, {"username":username})
     db.session.commit()
+    return True
 
 @app.route("/addCard", methods =["POST"])    
 def addCard():
     if(session["username"]):
 		
         username = session["username"]
-        orderCard(username)
+
+        if not orderCard(username):
+            return render_template("userPage.html", error = "Voit tilata yhden kortin kerrallaan, odota hyväksyntää")
+
         card_number = ""
         for i in range(16):
             card_number += str(random.randint(0,9))
