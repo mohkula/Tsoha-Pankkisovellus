@@ -32,7 +32,7 @@ def ShowUserInfo():
 
 
 
-@app.route("/showCards")
+@app.route("/showCards", methods = ["POST"])
 def showCards():
     if(session["username"]):
 		
