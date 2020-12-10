@@ -12,17 +12,17 @@
 <form action="/newUser" method="POST" onsubmit="return check(this)">
 <p>Luo Käyttäjä<br>
 <p>Tunnus:<br>
-<input type="Text" name="newUsername"></p>
+<input type="Text" name="newUsername" value = {{username}}></p>
 <p>Sähköpostiosoite:<br>
-<input type="Text" name="emailAddress"></p>
+<input type="Text" name="emailAddress" value = {{email}}></p>
 <p>Puhelinnumero:<br>
-<input type="Text" name="phoneNumber"></p>
+<input type="Text" name="phoneNumber" value = {{phone}}></p>
 
 <p>Osoite:<br>
-<input type="Text" name="address"></p>
+<input type="Text" name="address" value = {{address}}></p>
 
 <p>Salasana:<br>
-<input type="password" name="newPassword"></p>
+<input type="password" name="newPassword" value = {{password}}></p>
 <input type="submit" value="Luo käyttäjä">
 <a href="/">Takaisin</a>
 </form>

@@ -56,6 +56,10 @@ def orderUser(username):
 
 
 
+def returnCreateUser(error, username, email, phone, address):
+    return render_template("createUser.html", error = error, username = username, email = email, phone = phone, address = address)
+
+
 @app.route("/newUser", methods =["POST"])
 def newUser():
     username = request.form["newUsername"]
@@ -67,35 +71,36 @@ def newUser():
     
     if len(username) == 0:
         
-        return render_template("createUser.html", error = "Käyttäjänimi ei saa olla tyhjä")
+        return returnCreateUser("Käyttäjänimi ei saa olla tyhjä", username, email, phoneNumber, address)
 
     if len(password) == 0:
         
-        return render_template("createUser.html", error = "Salasana ei saa olla tyhjä")
+       return returnCreateUser("Salasana ei saa olla tyhjä", username, email, phoneNumber, address)
         
     if isTooLong(username, 10):
-        return render_template("createUser.html", error = "Käyttäjänimi saa olla enintään 10 merkkiä")
+        return returnCreateUser("Salasana saa olla enintään 10 merkkiä", username, email, phoneNumber, address)
+
         
     if isTooLong(email, 30):
-        return render_template("createUser.html", error = "Sähköposti saa olla enintään 30 merkkiä")
+       return returnCreateUser("Sähköposti saa olla enintään 30 merkkiä", username, email, phoneNumber, address)
         
     if isTooLong(address, 30):
-        return render_template("createUser.html", error = "Osoite saa olla enintään 30 merkkiä")
+       return returnCreateUser("Osoite saa olla enintään 30 merkkiä", username, email, phoneNumber, address)
         
     if isTooLong(password, 30):
-        return render_template("createUser.html", error = "Salasana saa olla enintään 30 merkkiä")
+       return returnCreateUser("Salasana saa olla enintään 30 merkkiä", username, email, phoneNumber, address)
     
 
     	
     if not emailMatch(email):
-    	return render_template("createUser.html", error = "Sähköposti ei kelpaa")
+       return returnCreateUser("Sähköposti ei kelpaa", username, email, phoneNumber, address)
    
     if len(phoneNumber) != 10 or not phoneNumber.isdigit():
     	
-    	return render_template("createUser.html", error = "Puhelinnumero ei kelpaa, täytyy olla 10 numeroa")
+       return returnCreateUser("Puhelinnumero ei kelpaa, täytyy olla 10 numeroa", username, email, phoneNumber, address)
     	
     if len(address) == 0:
-        return render_template("createUser.html", error = "Osoite ei saa olla tyhjä")
+       return returnCreateUser("Osoite ei saa olla tyhjä", username, email, phoneNumber, address)
         
 
     
@@ -116,11 +121,11 @@ def newUser():
            # session["username"] = username
         else:
             
-            return render_template("createUser.html",error = "Saĺasana liian lyhyt")
+            return returnCreateUser("Salasana liian lyhyt, täytyy olla vähintään 8 merkkiä", username, email, phoneNumber, address)
 
   
     else:
-        return render_template("createUser.html", error = "Käyttäjänimi on jo olemassa")
+        return returnCreateUser("Käyttäjänimi on jo olemassa", username, email, phoneNumber, address)
 
     
   
