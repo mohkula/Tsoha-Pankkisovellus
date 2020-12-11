@@ -14,14 +14,24 @@ def showCustomerInfo():
         if session["csrf_token"] != request.form["csrf_token"]:
             abort(403)
         
-        sql = "SELECT username, email, phone, address FROM users WHERE username <> 'Mainuser'"
+        sql = "SELECT username, email, phone, address FROM users WHERE username <> 'Mainuser' AND active = TRUE"
         result = db.session.execute(sql)
         userInfo = result.fetchall()
+        if not userInfo:
+            return render_template("mainuserPage.html", error = "Asiakkaita ei löytynyt")
+
+
+
+        userInfoList = []
+
+        for i in userInfo:
+
+            userInfoList.append("Käyttäjänimi: " + str(i[0]) + ", sähköpotiosoite:  " + str(i[1]) + ", puhelinnumero: " + str(i[2]) + ", osoite: " + str(i[3]))
+
     
     
     
-    
-        return render_template("mainuserPage.html", userInfo = userInfo)
+        return render_template("mainuserPage.html", userInfo = userInfoList)
     
     return redirect("/")
     
@@ -83,6 +93,8 @@ def applyNewUsername():
         db.session.commit()
         return render_template("mainuserPage.html", success = "käyttäjän " + username + " käyttäjänimi vaihdettu, uusi käyttäjänimi: " + newUsername)
 
+    return redirect("/")
+
             
 
 
@@ -124,7 +136,9 @@ def applyNewEmail():
         db.session.commit()    
         
         return render_template("mainuserPage.html", success = "käyttäjän " + username + " sähköpotiosoite vaihdettu, uusi sähköpotiosoite: " + newEmail) 
-        
+    
+    return redirect("/")
+
 
 
 
@@ -142,6 +156,9 @@ def changeEmail():
             abort(403)
         
         return render_template("editInfo.html", email = "Sähköposti")
+
+    return redirect("/")
+
 	
 	
     
@@ -170,6 +187,8 @@ def applyNewPhonenumber():
         db.session.commit()    
         
         return render_template("mainuserPage.html", success = "käyttäjän " + username + " puhelinnumero vaihdettu, uusi puhelinnumero: " + newPhone) 
+    
+    return redirect("/")
 
 
 	
@@ -181,6 +200,8 @@ def changePhonenumber():
             abort(403)
    
         return render_template("editInfo.html", phoneNumber = "Puhelinnumero")
+
+    return redirect("/")
 
 	
 
@@ -209,6 +230,8 @@ def applyNewAddress():
         
         return render_template("mainuserPage.html", success = "käyttäjän " + username + " osoite vaihdettu, uusi osoite: " + newAddress) 
 
+    return redirect("/")
+
 
 
 	
@@ -220,6 +243,8 @@ def changeAddress():
     	
         
         return render_template("editInfo.html", address = "osoite")
+    
+    return redirect("/")
 
 
 
@@ -235,7 +260,8 @@ def showCardOrders():
         result = db.session.execute(sql)
         orderInfo = result.fetchall()
 
-        if orderInfo == None:
+
+        if not orderInfo:
             return render_template("mainuserPage.html", error = "Ei tilattuja kortteja")
 
 
@@ -267,8 +293,8 @@ def showAccountOrders():
         sql = "SELECT username, orderingDate FROM orders WHERE type = 0"
         result = db.session.execute(sql)
         orderInfo = result.fetchall()
-
-        if orderInfo == None:
+        
+        if not orderInfo:
             return render_template("mainuserPage.html", error = "Ei tilattuja Käyttäjiä")
 
         orderInfoList = []
@@ -398,7 +424,7 @@ def showWarnings():
         result = db.session.execute(sql)
         warnings = result.fetchall()
 
-        if warnings == None:
+        if not warnings:
             return render_template("mainuserPage.html", error = "Ei varoituksia")
 
 

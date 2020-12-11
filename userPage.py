@@ -20,6 +20,10 @@ def ShowUserInfo():
          
 	
         user_info = result.fetchall()
+
+
+
+
         user_infoList = []
         for i in user_info:
             user_infoList.append("Käyttäjänimi: " + str(i[0]) + ", Sähköpostiosoite: " + str(i[1]) + ", Puhelinnumero " + str(i[2]) + ", Osoite: " + str(i[3]) )
@@ -45,6 +49,11 @@ def showCards():
         sql = "SELECT card_number, expirationdate FROM cards WHERE customer_id= (SELECT id FROM users WHERE username =:username) AND active = TRUE"
         result = db.session.execute(sql, {"username":username})
         card_info = result.fetchall()
+
+        if not card_info:
+            return render_template("userPage.html", error = "Kortteja ei löytynyt")
+
+
         card_infoList = []
         for i in card_info:
             card_infoList.append("Kortin numero: " +str(i[0]) + ", kortin voimassaoloaika: " + str(i[1]))
@@ -203,9 +212,13 @@ def showBankAccount():
         sql = "SELECT account_number, balance, openingdate FROM bankAccounts WHERE customer_id= (SELECT id FROM users WHERE username =:username) AND active = TRUE"
         result = db.session.execute(sql, {"username":username})
         bank_info = result.fetchall()
+
+        if not bank_info:
+            return render_template("userPage.html", error = "Tilitietoja ei löytynyt")
+
         bank_infoList = []
         for i in bank_info:
-            bank_infoList.append("tilinumero: " +str(i[0]) + " saldo: " + str(i[1]) + " avattu: " + str(i[2]))
+            bank_infoList.append("tilinumero: " +str(i[0]) + ", saldo: " + str(i[1]) + ", avattu: " + str(i[2]))
             
              
         
