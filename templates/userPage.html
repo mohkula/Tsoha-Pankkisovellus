@@ -81,22 +81,26 @@ Tilitiedot:
 
 
 <input type="submit" value="Näytä tiedot">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 
 
 <form action="/showCards" method="POST">
 
 <input type="submit" value="Näytä korttien tiedot">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 
 </form>
 
 
-</form>
+
 
 
 <form action="/reportMissingCard" method="POST">
 
 <input type="submit", value="Tee ilmoitus kadonneesta kortista">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
 
 </form>
 
@@ -104,6 +108,8 @@ Tilitiedot:
 
 
 <input type="submit" value="Tilaa uusi kortti">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
 
 </form>
 
@@ -112,9 +118,11 @@ Tilitiedot:
 
 
 <input type="submit" value="näytä tilitiedot">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
 <a href="/logout">Kirjaudu ulos</a>
 
-</form>
+
 
 
 

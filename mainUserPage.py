@@ -11,6 +11,8 @@ import newUser
 def showCustomerInfo():
     
     if(session["username"] == "Mainuser"):
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         
         sql = "SELECT username, email, phone, address FROM users WHERE username <> 'Mainuser'"
         result = db.session.execute(sql)
@@ -27,6 +29,8 @@ def showCustomerInfo():
 @app.route("/changeUserInfo", methods =["POST"])
 def changeUserInfo():
     if(session["username"] == "Mainuser"):
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         
         
         return render_template("editInfo.html")
@@ -46,6 +50,10 @@ def usernameExists(username):
 @app.route("/applyNewUsername", methods = ["POST"])
 def applyNewUsername():
     if(session["username"] == "Mainuser"):
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
+
+
         username = request.form["user"]
         newUsername = request.form["newUser"]
         sql = "SELECT username FROM users WHERE username=:username AND active = TRUE"
@@ -82,8 +90,13 @@ def applyNewUsername():
 @app.route("/changeUsername", methods = ["POST"])
 def changeUsername():
     if(session["username"] == "Mainuser"):
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         
-       return render_template("editInfo.html", username = "Käyttäjänimi")
+        return render_template("editInfo.html", username = "Käyttäjänimi")
+
+    return redirect("/")
+
 
         
         
@@ -91,6 +104,8 @@ def changeUsername():
 @app.route("/applyNewEmail", methods = ["POST"])
 def applyNewEmail():
     if(session["username"] == "Mainuser"):
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
 
         username = request.form["user"]
         if not usernameExists(username):
@@ -123,6 +138,8 @@ def applyNewEmail():
 @app.route("/changeEmail", methods = ["POST"])
 def changeEmail():
     if(session["username"] == "Mainuser"):
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         
         return render_template("editInfo.html", email = "Sähköposti")
 	
@@ -130,6 +147,8 @@ def changeEmail():
     
 @app.route("/applyNewPhonenumber", methods = ["POST"])
 def applyNewPhonenumber():
+    if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
 
     if(session["username"] == "Mainuser"):
 
@@ -158,6 +177,8 @@ def applyNewPhonenumber():
 @app.route("/changePhonenumber", methods = ["POST"])
 def changePhonenumber():   	
     if(session["username"] == "Mainuser"):
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
    
         return render_template("editInfo.html", phoneNumber = "Puhelinnumero")
 
@@ -167,6 +188,8 @@ def changePhonenumber():
 def applyNewAddress():
 
     if(session["username"] == "Mainuser"):
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
 
 
         username = request.form["user"]
@@ -192,6 +215,8 @@ def applyNewAddress():
 @app.route("/changeAddress", methods = ["POST"])
 def changeAddress():
     if(session["username"] == "Mainuser"):
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
     	
         
         return render_template("editInfo.html", address = "osoite")
@@ -203,6 +228,8 @@ def changeAddress():
 def showCardOrders():
 
     if(session["username"] == "Mainuser"):
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         
         sql = "SELECT customer_id, orderingDate FROM orders WHERE type = 1"
         result = db.session.execute(sql)
@@ -234,6 +261,8 @@ def showCardOrders():
 def showAccountOrders():
 
     if(session["username"] == "Mainuser"):
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         
         sql = "SELECT username, orderingDate FROM orders WHERE type = 0"
         result = db.session.execute(sql)
@@ -283,13 +312,20 @@ def getCard(card_id):
 
 @app.route("/acceptSelectedCards", methods = ["POST"])
 def acceptSelectedCards():
-    
-    checkBox = request.form.getlist('usersCards')
-   
-    for i in checkBox:
-        verifyCard(i)
 
-    return render_template("mainuserPage.html")
+    if(session["username"] == "Mainuser"):
+        if session["csrf_token"] != request.form["csrf_token"]:
+                abort(403)
+        
+        checkBox = request.form.getlist('usersCards')
+       
+        for i in checkBox:
+            verifyCard(i)
+
+        return render_template("mainuserPage.html")
+
+    return redirect("/")
+
 
 
 def verifyCard(username):
@@ -318,13 +354,21 @@ def verifyCard(username):
 
 @app.route("/acceptSelectedCustomers", methods = ["POST"])
 def acceptSelectedCustomers():
-    
-    checkBox = request.form.getlist('users')
-   
-    for i in checkBox:
-        verifyUser(i)
 
-    return render_template("mainuserPage.html", success = "Valitut käyttäjät hyväksytty")
+    if(session["username"] == "Mainuser"):
+
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
+        
+        checkBox = request.form.getlist('users')
+       
+        for i in checkBox:
+            verifyUser(i)
+
+        return render_template("mainuserPage.html", success = "Valitut käyttäjät hyväksytty")
+
+    return redirect("/")
+
 
 
 def verifyUser(username):
@@ -343,32 +387,41 @@ def verifyUser(username):
     
 @app.route("/showWarnings", methods = ["POST"])
 def showWarnings():
-    sql = "SELECT card_id, type, date  FROM cardwarnings ORDER BY type DESC"
 
-    result = db.session.execute(sql)
-    warnings = result.fetchall()
+    if(session["username"] == "Mainuser"):
 
-    if warnings == None:
-        return render_template("mainuserPage.html", error = "Ei varoituksia")
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
+
+        sql = "SELECT card_id, type, date  FROM cardwarnings ORDER BY type DESC"
+
+        result = db.session.execute(sql)
+        warnings = result.fetchall()
+
+        if warnings == None:
+            return render_template("mainuserPage.html", error = "Ei varoituksia")
 
 
-    warningList = []
-        
-    for i in warnings:
-
-        if(int(i[1]) == 1):
-            message = " on varastettu"
-
-        elif(int(i[1]) == 0):
-            message = " on kadonnut"
+        warningList = []
             
+        for i in warnings:
 
-        warningList.append("kortti " + str(getCard(i[0])) + message + ", ilmoitettu: " + str(i[2])    )
+            if(int(i[1]) == 1):
+                message = " on varastettu"
+
+            elif(int(i[1]) == 0):
+                message = " on kadonnut"
+                
+
+            warningList.append("kortti " + str(getCard(i[0])) + message + ", ilmoitettu: " + str(i[2])    )
+                
             
         
-    
-    
-    return render_template("mainuserPage.html", warnings = warningList)
+        
+        return render_template("mainuserPage.html", warnings = warningList)
+
+    return redirect("/")
+
     
     
 

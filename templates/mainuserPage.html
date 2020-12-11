@@ -66,6 +66,7 @@ Valitse Käyttäjien nimet joiden kortit hyväksytään:
 
 
 <input type="submit" value="Hyväksy valittujen käyttäjien kortit">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 
 </form>
 
@@ -111,6 +112,7 @@ Valitse käyttäjät jotka hyväksytään:
 
 
 <input type="submit" value="Hyväksy valitut käyttäjät">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 
 </form>
 
@@ -149,6 +151,7 @@ Uusien korttien tilaukset:
 <form action="/showCustomerInfo" method="POST">
 
 <input type="submit" value="Näytä asiakkaiden tiedot">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 
 </form>
 
@@ -156,23 +159,25 @@ Uusien korttien tilaukset:
 
 
 
-</form>
+
 
 <form action="/changeUserInfo" method="POST">
 
 
 <input type="submit" value="Muokkaa asiakkaan tietoja">
 
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 
 </form>
 
 
-</form>
+
 
 <form action="/showCardOrders" method="POST">
 
 
 <input type="submit" value="Näytä tilatut kortit">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 
 
 </form>
@@ -182,6 +187,7 @@ Uusien korttien tilaukset:
 
 <input type="submit" value="Näytä tilatut käyttäjät">
 
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 
 </form>
 
@@ -190,6 +196,7 @@ Uusien korttien tilaukset:
 
 <input type="submit" value="Näytä kortteihin liittyvät varoitukset">
 
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 
 </form>
 

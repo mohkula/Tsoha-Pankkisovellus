@@ -11,6 +11,8 @@ def ShowUserInfo():
 	
     if(session["username"]):
 		
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         username = session["username"]
 
         sql = "SELECT username, email, phone, address FROM users WHERE username=:username"
@@ -35,6 +37,8 @@ def ShowUserInfo():
 @app.route("/showCards", methods = ["POST"])
 def showCards():
     if(session["username"]):
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
 		
         username = session["username"]
 
@@ -43,7 +47,7 @@ def showCards():
         card_info = result.fetchall()
         card_infoList = []
         for i in card_info:
-            card_infoList.append(("kortin numero: " +str(i[0]),"kortin voimassaoloaika: " + str(i[1])))
+            card_infoList.append("Kortin numero: " +str(i[0]) + ", kortin voimassaoloaika: " + str(i[1]))
             
              
 	
@@ -75,6 +79,8 @@ def orderCard(username):
 @app.route("/addCard", methods =["POST"])    
 def addCard():
     if(session["username"]):
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
 		
         username = session["username"]
 
@@ -112,39 +118,52 @@ def addCard():
 
 @app.route("/reportMissingCard", methods = ["POST"])
 def reportMissingCard():
+    if(session["username"]):
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
 
-    return render_template("reportMissingCard.html")
+        return render_template("reportMissingCard.html")
     
+    return redirect("/")    
+
 	
     
 
 @app.route("/addCardReport", methods = ["POST"])
 def addCardReport():
-    card_number = request.form["lostCard"]
+
+    if(session["username"]):
+
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
+        card_number = request.form["lostCard"]
 
 
-    if not card_number.isdigit():
-        return render_template("reportMissingCard.html", error = "Antamasi kortin numero ei kelpaa")
-
-
-
-    if not isUsersCard(card_number):
-        return render_template("reportMissingCard.html", error = "Korteistasi ei löydy korttia numerolla: " + card_number)
-
-
-    type = int(request.form["type"])
+        if not card_number.isdigit():
+            return render_template("reportMissingCard.html", error = "Antamasi kortin numero ei kelpaa")
 
 
 
+        if not isUsersCard(card_number):
+            return render_template("reportMissingCard.html", error = "Korteistasi ei löydy korttia numerolla: " + card_number)
 
 
-    sql = """INSERT INTO cardWarnings (card_id,type)
-        VALUES ((SELECT id from cards WHERE card_number =:card_number),:type)"""
+        type = int(request.form["type"])
 
-    db.session.execute(sql, {"card_number":card_number,"type":type})
-    db.session.commit()
 
-    return render_template("userPage.html", success = "Kortti raportoitu")
+
+
+
+        sql = """INSERT INTO cardWarnings (card_id,type)
+            VALUES ((SELECT id from cards WHERE card_number =:card_number),:type)"""
+
+        db.session.execute(sql, {"card_number":card_number,"type":type})
+        db.session.commit()
+
+        return render_template("userPage.html", success = "Kortti raportoitu")
+
+    return redirect("/")    
+
 
 def isUsersCard(card_number):
 
@@ -176,6 +195,8 @@ def isUsersCard(card_number):
 @app.route("/showBankAccount", methods = ["POST"])
 def showBankAccount():
     if(session["username"]):
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         
         username = session["username"]
 

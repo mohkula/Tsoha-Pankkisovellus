@@ -30,7 +30,8 @@ Uusi sähköpostiosoite:
 <input type="Text" name ="email"></p>
 
 <input type="submit" value="muokkaa sähköpostiosoitetta">
-<a href="/mainuserPage">Takaisin</a>
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
 
 </form>
 
@@ -54,8 +55,8 @@ Uusi käyttäjänimi:
 <input type="Text" name ="newUser" ></p>
 
 <input type="submit" value="muokkaa käyttäjänimeä">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 
-<a href="/mainuserPage">Takaisin</a>
 
 </form>
 
@@ -78,7 +79,7 @@ Uusi puhelinnumero:
 <input type="Text" name ="phoneNumber"></p>
 
 <input type="submit" value="muokkaa puhelinnumeroa">
-<a href="/mainuserPage">Takaisin</a>
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 
 </form>
 
@@ -102,7 +103,7 @@ Uusi osoite:
 <input type="Text" name ="address"></p>
 
 <input type="submit" value="muokkaa osoitetta">
-<a href="/mainuserPage">Takaisin</a>
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 
 </form>
 
@@ -120,6 +121,8 @@ Uusi osoite:
 
 
 <input type="submit" value="Käyttäjänimi">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
 </form>
 
 
@@ -128,18 +131,26 @@ Uusi osoite:
 
 
 <input type="submit" value="Sähköpostiosoite">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
 </form>
 
 <form action="/changePhonenumber" method="POST">
 <input type="submit" value="puhelinnumero">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
 </form>
 
 <form action="/changeAddress" method="POST">
 <input type="submit" value="osoite">
-<a href="/mainuserPage">Takaisin</a>
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
 
 
 </form>
+
+<a href="/mainuserPage">Takaisin</a>
+
 
 
 {% endif %}

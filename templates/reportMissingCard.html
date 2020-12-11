@@ -25,6 +25,8 @@ kadonneen kortin numero:
 
 
 <input type="submit" value="Tee ilmoitus">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
 
 <a href="/userPage">Takaisin</a>
 

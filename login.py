@@ -2,6 +2,7 @@ from db import db
 from app import app
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask import render_template, session, redirect, request
+import os  
 
 import routes
 import userPage
@@ -42,6 +43,7 @@ def login():
         	
         	
         session["username"] = username
+        session["csrf_token"] = os.urandom(16).hex()
         if(isMainuser(username)):
         	return render_template("mainuserPage.html")
         	
