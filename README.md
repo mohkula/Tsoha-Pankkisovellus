@@ -3,17 +3,15 @@
 # Sovelluksen nykyinen tila:
 
 Sovelluksessa voi luoda uuden käyttäjän antamalla käyttäjänimen, sähköpostiosoitteen, puhelinnumeron, osoitteen ja salasanan.
-käyttäjää luodessa ohjelma valittaa jos käyttäjänimi on tyhjä tai salasana liian lyhyt (täytyy olla vähintään 8 merkkiä).
-sähköpostin pitää olla muotoa (jotain.jotain@jotain.com) ja puhelinnumeror täytyy sisältää pelkkiä numeroita 10 kpl.
-Kun käyttäjä on luotu, pääsee käyttäjäsivulle, josta voi nähdä omat tietonsa. Käyttäjäsivulle pääsee myös kirjautumalla käyttäjänimellä
-ja salasanalla.
+käyttäjää luodessa ohjelma valittaa väärin täytetyistä kentistä esim. sähköpostin täytyy olla muotoa jotain.jotain@jotain.com
+Kun käyttäjä on luotu, täytyy pääkäyttäjän käydä se hyväksymässä. Käyttäjä voi omalla sivullaan nähdä tietojansa, tilata kortin
+ja tehdä ilmoituksen kortistaan
 
-Käyttäjäsivulla voi tilata uuden kortin ja nähdä omien korttien tiedot.
 
 Sovellukseen voi kirjautua pääkäyttäjänä käyttämällä tunnusta Mainuser ja salasanaa MainuserPassword. Main user voi muokata olemassa olevien asiakkaiden
 tietoja.
 
-Pääkäyttäjä voi nähdä tilatut kortit ja käyttäjät sekä hyväksyä ne.
+Pääkäyttäjä voi nähdä tilatut kortit ja käyttäjät sekä hyväksyä ne. Pääkäyttäjä voi myös nähdä kortteihin liittyvät varoitukset.
   
 Ohjelmaa pääsee kokeilemaan tästä linkistä:
 https://tsoha-bank.herokuapp.com/
