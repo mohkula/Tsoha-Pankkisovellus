@@ -5,7 +5,7 @@
 Sovelluksessa voi luoda uuden käyttäjän antamalla käyttäjänimen, sähköpostiosoitteen, puhelinnumeron, osoitteen ja salasanan.
 käyttäjää luodessa ohjelma valittaa väärin täytetyistä kentistä esim. sähköpostin täytyy olla muotoa jotain.jotain@jotain.com
 Kun käyttäjä on luotu, täytyy pääkäyttäjän käydä se hyväksymässä. Käyttäjä voi omalla sivullaan nähdä tietojansa, tilata kortin
-ja tehdä ilmoituksen kortistaan
+ja tehdä ilmoituksen kortistaan.
 
 
 Sovellukseen voi kirjautua pääkäyttäjänä käyttämällä tunnusta Mainuser ja salasanaa MainuserPassword. Main user voi muokata olemassa olevien asiakkaiden
